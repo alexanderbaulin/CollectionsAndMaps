@@ -41,7 +41,8 @@ public class CollectionsTest {
     private static Integer testElement = 1;
 
     public static void fillWithElements(List<Integer> list) {
-        for(int i = 0; i < 10000; i++) {
+        for(int i = 0; i < 1000000; i++) {
+            if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
             list.add(i);
         }
         Log.d("myLogs", list.getClass() + " filled with elements");

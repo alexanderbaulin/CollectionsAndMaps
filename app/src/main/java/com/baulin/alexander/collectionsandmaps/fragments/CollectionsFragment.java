@@ -106,13 +106,13 @@ public class CollectionsFragment extends Fragment {
                     timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.arrayList);
                     break;
                 case CollectionsTest.ARRAY_REMOVE_BEGIN:
-                    timeTaskExecution = CollectionsTest.addInTheBegin(CollectionsTest.arrayList);
+                    timeTaskExecution = CollectionsTest.removeInTheBegin(CollectionsTest.arrayList);
                     break;
                 case CollectionsTest.ARRAY_REMOVE_MIDDLE:
-                    timeTaskExecution = CollectionsTest.addInTheMiddle(CollectionsTest.arrayList);
+                    timeTaskExecution = CollectionsTest.removeInTheMiddle(CollectionsTest.arrayList);
                     break;
                 case CollectionsTest.ARRAY_REMOVE_END:
-                    timeTaskExecution = CollectionsTest.addInTheEnd(CollectionsTest.arrayList);
+                    timeTaskExecution = CollectionsTest.removeInTheEnd(CollectionsTest.arrayList);
                     break;
 
                 case CollectionsTest.LINKED_ADD_BEGIN:
@@ -128,13 +128,13 @@ public class CollectionsFragment extends Fragment {
                     timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.linkedList);
                     break;
                 case CollectionsTest.LINKED_REMOVE_BEGIN:
-                    timeTaskExecution = CollectionsTest.addInTheBegin(CollectionsTest.linkedList);
+                    timeTaskExecution = CollectionsTest.removeInTheBegin(CollectionsTest.linkedList);
                     break;
                 case CollectionsTest.LINKED_REMOVE_MIDDLE:
-                    timeTaskExecution = CollectionsTest.addInTheMiddle(CollectionsTest.linkedList);
+                    timeTaskExecution = CollectionsTest.removeInTheMiddle(CollectionsTest.linkedList);
                     break;
                 case CollectionsTest.LINKED_REMOVE_END:
-                    timeTaskExecution = CollectionsTest.addInTheEnd(CollectionsTest.linkedList);
+                    timeTaskExecution = CollectionsTest.removeInTheEnd(CollectionsTest.linkedList);
                     break;
 
                 case CollectionsTest.COPY_ON_WRITE_BEGIN:
@@ -150,13 +150,13 @@ public class CollectionsFragment extends Fragment {
                     timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.copyOnWriteArrayList);
                     break;
                 case CollectionsTest.COPY_ON_WRITE_REMOVE_BEGIN:
-                    timeTaskExecution = CollectionsTest.addInTheBegin(CollectionsTest.copyOnWriteArrayList);
+                    timeTaskExecution = CollectionsTest.removeInTheBegin(CollectionsTest.copyOnWriteArrayList);
                     break;
                 case CollectionsTest.COPY_ON_WRITE_REMOVE_MIDDLE:
-                    timeTaskExecution = CollectionsTest.addInTheMiddle(CollectionsTest.copyOnWriteArrayList);
+                    timeTaskExecution = CollectionsTest.removeInTheMiddle(CollectionsTest.copyOnWriteArrayList);
                     break;
                 case CollectionsTest.COPY_ON_WRITE_REMOVE_END:
-                    timeTaskExecution = CollectionsTest.addInTheEnd(CollectionsTest.copyOnWriteArrayList);
+                    timeTaskExecution = CollectionsTest.removeInTheEnd(CollectionsTest.copyOnWriteArrayList);
                     break;
             }
             return timeTaskExecution;

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.baulin.alexander.collectionsandmaps.CollectionsTest;
+import com.baulin.alexander.collectionsandmaps.MapsTest;
 import com.baulin.alexander.collectionsandmaps.R;
 import com.baulin.alexander.collectionsandmaps.SectionsPageAdapter;
 import com.baulin.alexander.collectionsandmaps.fragments.CollectionsFragment;
@@ -21,6 +22,8 @@ public class Main extends AppCompatActivity {
     private static final String ARRAY_LIST = "arrayList";
     private static final String LINKED_LIST = "linkedList";
     private static final String COPY_ARRAY_LIST = "copyArrayList";
+    private static final String HASH_MAP = "hashMap";
+    private static final String TREE_MAP = "treeMap";
     SectionsPageAdapter pageAdapter;
 
     @Override
@@ -39,6 +42,8 @@ public class Main extends AppCompatActivity {
         new CollectionFillTask().execute(ARRAY_LIST);
         new CollectionFillTask().execute(LINKED_LIST);
         new CollectionFillTask().execute(COPY_ARRAY_LIST);
+        new CollectionFillTask().execute(HASH_MAP);
+        new CollectionFillTask().execute(TREE_MAP);
     }
 
     public void onClickFloatingActionButton(View view) {
@@ -61,6 +66,12 @@ public class Main extends AppCompatActivity {
                     break;
                 case COPY_ARRAY_LIST:
                     CollectionsTest.fillWithElements(CollectionsTest.copyOnWriteArrayList);
+                    break;
+                case HASH_MAP:
+                    MapsTest.fillWithElements(MapsTest.hashMap);
+                    break;
+                case TREE_MAP:
+                    MapsTest.fillWithElements(MapsTest.treeMap);
                     break;
             }
             return null;

@@ -2,4 +2,19 @@
     <string name="app_name">CollectionsAndMaps</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="arraylist">ArrayList</string>
+    <string name="linkedlist">LinkedList</string>
+    <string name="copyonwritelist">CopyOnWriteList</string>
+    <string name="adding_in_the_beginning">adding in the beginning</string>
+    <string name="adding_in_the_middle">adding in the middle</string>
+    <string name="adding_in_the_end">adding in the end</string>
+    <string name="search_by_value">search by value</string>
+    <string name="removing_in_the_beginning">removing in the beginning</string>
+    <string name="removing_in_the_middle">removing in the middle</string>
+    <string name="removing_in_the_end">removing in the end</string>
+    <string name="hashmap">HashMap</string>
+    <string name="treemap">TreeMap</string>
+    <string name="adding_new">adding new</string>
+    <string name="search_by_key">search by key</string>
+    <string name="removing">removing</string>
 </resources>

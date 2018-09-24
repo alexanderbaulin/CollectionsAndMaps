@@ -16,41 +16,41 @@ import android.widget.TextView;
 import com.baulin.alexander.collectionsandmaps.CollectionsTest;
 import com.baulin.alexander.collectionsandmaps.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class CollectionsFragment extends Fragment {
     View view;
-    TextView arrayAddBegin, arrayAddMiddle, arrayAddEnd, arraySearchValue, arrayRemoveBegin, arrayRemoveMiddle, arrayRemoveEnd;
-    TextView linkedAddBegin, linkedAddMiddle, linkedAddEnd, linkedSearchValue, linkedRemoveBegin, linkedRemoveMiddle, linkedRemoveEnd;
-    TextView copyOnWriteAddBegin, copyOnWriteAddMiddle, copyOnWriteAddEnd, copyOnWriteSearchValue, copyOnWriteRemoveBegin, copyOnWriteRemoveMiddle, copyOnWriteRemoveEnd;
+
+    @BindView(R.id.txtArrayAddBegin) TextView arrayAddBegin;
+    @BindView(R.id.txtArrayAddMiddle) TextView arrayAddMiddle;
+    @BindView(R.id.txtArrayAddEnd) TextView arrayAddEnd;
+    @BindView(R.id.txtArraySearchValue) TextView arraySearchValue;
+    @BindView(R.id.txtArrayRemoveBegin) TextView arrayRemoveBegin;
+    @BindView(R.id.txtArrayRemoveMiddle) TextView arrayRemoveMiddle;
+    @BindView(R.id.txtArrayRemoveEnd) TextView arrayRemoveEnd;
+
+    @BindView(R.id.txtLinkedAddBegin) TextView linkedAddBegin;
+    @BindView(R.id.txtLinkedAddMiddle) TextView linkedAddMiddle;
+    @BindView(R.id.txtLinkedAddEnd) TextView linkedAddEnd;
+    @BindView(R.id.txtLinkedSearchValue) TextView linkedSearchValue;
+    @BindView(R.id.txtLinkedRemoveBegin) TextView linkedRemoveBegin;
+    @BindView(R.id.txtLinkedRemoveMiddle) TextView linkedRemoveMiddle;
+    @BindView(R.id.txtLinkedRemoveEnd) TextView linkedRemoveEnd;
+
+    @BindView(R.id.txtCopyOnWriteAddBegin) TextView copyOnWriteAddBegin;
+    @BindView(R.id.txtCopyOnWriteAddMiddle) TextView copyOnWriteAddMiddle;
+    @BindView(R.id.txtCopyOnWriteAddEnd) TextView copyOnWriteAddEnd;
+    @BindView(R.id.txtCopyOnWriteSearchValue) TextView copyOnWriteSearchValue;
+    @BindView(R.id.txtCopyOnWriteRemoveBegin) TextView copyOnWriteRemoveBegin;
+    @BindView(R.id.txtCopyOnWriteRemoveMiddle) TextView copyOnWriteRemoveMiddle;
+    @BindView(R.id.txtCopyOnWriteRemoveEnd) TextView copyOnWriteRemoveEnd;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.collections, container, false);
-
-        arrayAddBegin = view.findViewById(R.id.txtArrayAddBegin);
-        arrayAddMiddle = view.findViewById(R.id.txtArrayAddMiddle);
-        arrayAddEnd = view.findViewById(R.id.txtArrayAddEnd);
-        arraySearchValue = view.findViewById(R.id.txtArraySearchValue);
-        arrayRemoveBegin = view.findViewById(R.id.txtArrayRemoveBegin);
-        arrayRemoveMiddle = view.findViewById(R.id.txtArrayRemoveMiddle);
-        arrayRemoveEnd = view.findViewById(R.id.txtArrayRemoveEnd);
-
-        linkedAddBegin = view.findViewById(R.id.txtLinkedAddBegin);
-        linkedAddMiddle = view.findViewById(R.id.txtLinkedAddMiddle);
-        linkedAddEnd = view.findViewById(R.id.txtLinkedAddEnd);
-        linkedSearchValue = view.findViewById(R.id.txtLinkedSearchValue);
-        linkedRemoveBegin = view.findViewById(R.id.txtLinkedRemoveBegin);
-        linkedRemoveMiddle = view.findViewById(R.id.txtLinkedRemoveMiddle);
-        linkedRemoveEnd = view.findViewById(R.id.txtLinkedRemoveEnd);
-
-        copyOnWriteAddBegin = view.findViewById(R.id.txtCopyOnWriteAddBegin);
-        copyOnWriteAddMiddle = view.findViewById(R.id.txtCopyOnWriteAddMiddle);
-        copyOnWriteAddEnd = view.findViewById(R.id.txtCopyOnWriteAddEnd);
-        copyOnWriteSearchValue = view.findViewById(R.id.txtCopyOnWriteSearchValue);
-        copyOnWriteRemoveBegin = view.findViewById(R.id.txtCopyOnWriteRemoveBegin);
-        copyOnWriteRemoveMiddle = view.findViewById(R.id.txtCopyOnWriteRemoveMiddle);
-        copyOnWriteRemoveEnd = view.findViewById(R.id.txtCopyOnWriteRemoveEnd);
-
+        ButterKnife.bind(this, view);
         return view;
     }
 

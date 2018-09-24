@@ -63,19 +63,19 @@ public class MapsFragment extends Fragment {
                     timeTaskExecution = MapsTest.addNew(MapsTest.hashMap);
                     break;
                 case MapsTest.HASH_MAP_SEARCH:
-                    timeTaskExecution = CollectionsTest.addInTheMiddle(CollectionsTest.arrayList);
+                    timeTaskExecution = MapsTest.searchByKey(MapsTest.hashMap);
                     break;
                 case MapsTest.HASH_MAP_REMOVE:
-                    timeTaskExecution = CollectionsTest.addInTheEnd(CollectionsTest.arrayList);
+                    timeTaskExecution = MapsTest.remove(MapsTest.hashMap);
                     break;
                 case MapsTest.TREE_MAP_ADD:
-                    timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.arrayList);
+                    timeTaskExecution = MapsTest.addNew(MapsTest.treeMap);
                     break;
                 case MapsTest.TREE_MAP_SEARCH:
-                    timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.arrayList);
+                    timeTaskExecution = MapsTest.searchByKey(MapsTest.treeMap);
                     break;
                 case MapsTest.TREE_MAP_REMOVE:
-                    timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.arrayList);
+                    timeTaskExecution = MapsTest.remove(MapsTest.treeMap);
                     break;
             }
             return timeTaskExecution;

@@ -17,7 +17,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:gravity="center_horizontal"
@@ -51,26 +51,51 @@
                 android:text="@string/adding_in_the_beginning"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/txtArrayAddBegin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
+                <TextView
+                    android:id="@+id/txtArrayAddBegin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbArrayAddBegin"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/txtLinkedAddBegin"
-                android:layout_width="65dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
+                <TextView
+                    android:id="@+id/txtLinkedAddBegin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbLinkedAddBegin"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/txtCopyOnWriteAddBegin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
+                <TextView
+                    android:id="@+id/txtCopyOnWriteAddBegin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbCopyOnWriteAddBegin"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </TableRow>
 
         <TableRow android:padding="5dp">
@@ -82,26 +107,56 @@
                 android:text="@string/adding_in_the_middle"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/txtArrayAddMiddle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
 
-            <TextView
-                android:id="@+id/txtLinkedAddMiddle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/txtArrayAddMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/txtCopyOnWriteAddMiddle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbArrayAddMiddle"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtLinkedAddMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbLinkedAddMiddle"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtCopyOnWriteAddMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbCopyOnWriteAddMiddle"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </TableRow>
 
         <TableRow android:padding="5dp">
@@ -113,26 +168,53 @@
                 android:text="@string/adding_in_the_end"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/txtArrayAddEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
+                 <TextView
+                    android:id="@+id/txtArrayAddEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbArrayAddEnd"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/txtLinkedAddEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
+                <TextView
+                    android:id="@+id/txtLinkedAddEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/txtCopyOnWriteAddEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbLinkedAddEnd"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtCopyOnWriteAddEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbCopyOnWriteAddEnd"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </TableRow>
 
         <TableRow android:padding="5dp">
@@ -144,122 +226,242 @@
                 android:text="@string/search_by_value"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/txtArraySearchValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
 
-            <TextView
-                android:id="@+id/txtLinkedSearchValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/txtArraySearchValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/txtCopyOnWriteSearchValue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbArraySearchValue"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtLinkedSearchValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbLinkedSearchValue"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtCopyOnWriteSearchValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbCopyOnWriteSearchValue"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </TableRow>
 
         <TableRow android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="@string/removing_in_the_beginning"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/txtArrayRemoveBegin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
 
-            <TextView
-                android:id="@+id/txtLinkedRemoveBegin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/txtArrayRemoveBegin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/txtCopyOnWriteRemoveBegin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbArrayRemoveBegin"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtLinkedRemoveBegin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbLinkedRemoveBegin"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtCopyOnWriteRemoveBegin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbCopyOnWriteRemoveBegin"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </TableRow>
 
         <TableRow android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="@string/removing_in_the_middle"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/txtArrayRemoveMiddle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
 
-            <TextView
-                android:id="@+id/txtLinkedRemoveMiddle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/txtArrayRemoveMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/txtCopyOnWriteRemoveMiddle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbArrayRemoveMiddle"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtLinkedRemoveMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbLinkedRemoveMiddle"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtCopyOnWriteRemoveMiddle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbCopyOnWriteRemoveMiddle"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </TableRow>
 
         <TableRow android:padding="5dp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="@string/removing_in_the_end"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <TextView
-                android:id="@+id/txtArrayRemoveEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <FrameLayout>
 
-            <TextView
-                android:id="@+id/txtLinkedRemoveEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <TextView
+                    android:id="@+id/txtArrayRemoveEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
-                android:id="@+id/txtCopyOnWriteRemoveEnd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                <ProgressBar
+                    android:id="@+id/pbArrayRemoveEnd"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtLinkedRemoveEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbLinkedRemoveEnd"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtCopyOnWriteRemoveEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ProgressBar
+                    android:id="@+id/pbCopyOnWriteRemoveEnd"
+                    android:visibility="invisible"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </TableRow>
     </TableLayout>
 </android.support.constraint.ConstraintLayout>

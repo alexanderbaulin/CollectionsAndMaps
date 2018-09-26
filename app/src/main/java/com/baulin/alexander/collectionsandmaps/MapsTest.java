@@ -24,7 +24,7 @@ public class MapsTest {
     private static Integer testValue = 1;
 
     public static void fillWithElements(Map<Integer, Integer> map) {
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 10000; i++) {
             map.put(i, i);
         }
         Log.d("myLogs", map.getClass() + " filled with elements");

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -20,7 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CollectionsFragment extends Fragment {
-    View view;
 
     @BindView(R.id.txtArrayAddBegin) TextView arrayAddBegin;
     @BindView(R.id.txtArrayAddMiddle) TextView arrayAddMiddle;
@@ -46,10 +46,37 @@ public class CollectionsFragment extends Fragment {
     @BindView(R.id.txtCopyOnWriteRemoveMiddle) TextView copyOnWriteRemoveMiddle;
     @BindView(R.id.txtCopyOnWriteRemoveEnd) TextView copyOnWriteRemoveEnd;
 
+    @BindView(R.id.pbArrayAddBegin) ProgressBar pbArrayAddBegin;
+    @BindView(R.id.pbArrayAddMiddle) ProgressBar pbArrayAddMiddle;
+    @BindView(R.id.pbArrayAddEnd) ProgressBar pbArrayAddEnd;
+    @BindView(R.id.pbArraySearchValue) ProgressBar pbArraySearchValue;
+    @BindView(R.id.pbArrayRemoveBegin) ProgressBar pbArrayRemoveBegin;
+    @BindView(R.id.pbArrayRemoveMiddle) ProgressBar pbArrayRemoveMiddle;
+    @BindView(R.id.pbArrayRemoveEnd) ProgressBar pbArrayRemoveEnd;
+
+    @BindView(R.id.pbLinkedAddBegin) ProgressBar pbLinkedAddBegin;
+    @BindView(R.id.pbLinkedAddMiddle) ProgressBar pbLinkedAddMiddle;
+    @BindView(R.id.pbLinkedAddEnd) ProgressBar pbLinkedAddEnd;
+    @BindView(R.id.pbLinkedSearchValue) ProgressBar pbLinkedSearchValue;
+    @BindView(R.id.pbLinkedRemoveBegin) ProgressBar pbLinkedRemoveBegin;
+    @BindView(R.id.pbLinkedRemoveMiddle) ProgressBar pbLinkedRemoveMiddle;
+    @BindView(R.id.pbLinkedRemoveEnd) ProgressBar pbLinkedRemoveEnd;
+
+    @BindView(R.id.pbCopyOnWriteAddBegin) ProgressBar pbCopyOnWriteAddBegin;
+    @BindView(R.id.pbCopyOnWriteAddMiddle) ProgressBar pbCopyOnWriteAddMiddle;
+    @BindView(R.id.pbCopyOnWriteAddEnd) ProgressBar pbCopyOnWriteAddEnd;
+    @BindView(R.id.pbCopyOnWriteSearchValue) ProgressBar pbCopyOnWriteSearchValue;
+    @BindView(R.id.pbCopyOnWriteRemoveBegin) ProgressBar pbCopyOnWriteRemoveBegin;
+    @BindView(R.id.pbCopyOnWriteRemoveMiddle) ProgressBar pbCopyOnWriteRemoveMiddle;
+    @BindView(R.id.pbCopyOnWriteRemoveEnd) ProgressBar pbCopyOnWriteRemoveEnd;
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.collections, container, false);
+        View view = inflater.inflate(R.layout.collections, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -81,7 +108,7 @@ public class CollectionsFragment extends Fragment {
 
     }
 
-    private class TaskExecutor extends AsyncTask<String, Void, Long> {
+    private class TaskExecutor extends AsyncTask<String, Void, Object[]> {
         private TextView cell;
 
         TaskExecutor(TextView textView) {
@@ -89,83 +116,138 @@ public class CollectionsFragment extends Fragment {
         }
 
         @Override
-        protected Long doInBackground(String... strings) {
-            String testName = strings[0];
-            Long timeTaskExecution = 0L;
-            switch (testName) {
-                case CollectionsTest.ARRAY_ADD_BEGIN:
-                    timeTaskExecution = CollectionsTest.addInTheBegin(CollectionsTest.arrayList);
-                    break;
-                case CollectionsTest.ARRAY_ADD_MIDDLE:
-                    timeTaskExecution = CollectionsTest.addInTheMiddle(CollectionsTest.arrayList);
-                    break;
-                case CollectionsTest.ARRAY_ADD_END:
-                    timeTaskExecution = CollectionsTest.addInTheEnd(CollectionsTest.arrayList);
-                    break;
-                case CollectionsTest.ARRAY_SEARCH_VALUE:
-                    timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.arrayList);
-                    break;
-                case CollectionsTest.ARRAY_REMOVE_BEGIN:
-                    timeTaskExecution = CollectionsTest.removeInTheBegin(CollectionsTest.arrayList);
-                    break;
-                case CollectionsTest.ARRAY_REMOVE_MIDDLE:
-                    timeTaskExecution = CollectionsTest.removeInTheMiddle(CollectionsTest.arrayList);
-                    break;
-                case CollectionsTest.ARRAY_REMOVE_END:
-                    timeTaskExecution = CollectionsTest.removeInTheEnd(CollectionsTest.arrayList);
-                    break;
+        protected void onPreExecute() {
+            pbArrayAddBegin.setVisibility(View.VISIBLE);
+            pbArrayAddMiddle.setVisibility(View.VISIBLE);
+            pbArrayAddEnd.setVisibility(View.VISIBLE);
+            pbArraySearchValue.setVisibility(View.VISIBLE);
+            pbArrayRemoveBegin.setVisibility(View.VISIBLE);
+            pbArrayRemoveMiddle.setVisibility(View.VISIBLE);
+            pbArrayRemoveEnd.setVisibility(View.VISIBLE);
 
-                case CollectionsTest.LINKED_ADD_BEGIN:
-                    timeTaskExecution = CollectionsTest.addInTheBegin(CollectionsTest.linkedList);
-                    break;
-                case CollectionsTest.LINKED_ADD_MIDDLE:
-                    timeTaskExecution = CollectionsTest.addInTheMiddle(CollectionsTest.linkedList);
-                    break;
-                case CollectionsTest.LINKED_ADD_END:
-                    timeTaskExecution = CollectionsTest.addInTheEnd(CollectionsTest.linkedList);
-                    break;
-                case CollectionsTest.LINKED_SEARCH_VALUE:
-                    timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.linkedList);
-                    break;
-                case CollectionsTest.LINKED_REMOVE_BEGIN:
-                    timeTaskExecution = CollectionsTest.removeInTheBegin(CollectionsTest.linkedList);
-                    break;
-                case CollectionsTest.LINKED_REMOVE_MIDDLE:
-                    timeTaskExecution = CollectionsTest.removeInTheMiddle(CollectionsTest.linkedList);
-                    break;
-                case CollectionsTest.LINKED_REMOVE_END:
-                    timeTaskExecution = CollectionsTest.removeInTheEnd(CollectionsTest.linkedList);
-                    break;
+            pbLinkedAddBegin.setVisibility(View.VISIBLE);
+            pbLinkedAddMiddle.setVisibility(View.VISIBLE);
+            pbLinkedAddEnd.setVisibility(View.VISIBLE);
+            pbLinkedSearchValue.setVisibility(View.VISIBLE);
+            pbLinkedRemoveBegin.setVisibility(View.VISIBLE);
+            pbLinkedRemoveMiddle.setVisibility(View.VISIBLE);
+            pbLinkedRemoveEnd.setVisibility(View.VISIBLE);
 
-                case CollectionsTest.COPY_ON_WRITE_BEGIN:
-                    timeTaskExecution = CollectionsTest.addInTheBegin(CollectionsTest.copyOnWriteArrayList);
-                    break;
-                case CollectionsTest.COPY_ON_WRITE_ADD_MIDDLE:
-                    timeTaskExecution = CollectionsTest.addInTheMiddle(CollectionsTest.copyOnWriteArrayList);
-                    break;
-                case CollectionsTest.COPY_ON_WRITE_ADD_END:
-                    timeTaskExecution = CollectionsTest.addInTheEnd(CollectionsTest.copyOnWriteArrayList);
-                    break;
-                case CollectionsTest.COPY_ON_WRITE_SEARCH_VALUE:
-                    timeTaskExecution = CollectionsTest.searchByValue(CollectionsTest.copyOnWriteArrayList);
-                    break;
-                case CollectionsTest.COPY_ON_WRITE_REMOVE_BEGIN:
-                    timeTaskExecution = CollectionsTest.removeInTheBegin(CollectionsTest.copyOnWriteArrayList);
-                    break;
-                case CollectionsTest.COPY_ON_WRITE_REMOVE_MIDDLE:
-                    timeTaskExecution = CollectionsTest.removeInTheMiddle(CollectionsTest.copyOnWriteArrayList);
-                    break;
-                case CollectionsTest.COPY_ON_WRITE_REMOVE_END:
-                    timeTaskExecution = CollectionsTest.removeInTheEnd(CollectionsTest.copyOnWriteArrayList);
-                    break;
-            }
-            return timeTaskExecution;
+            pbCopyOnWriteAddBegin.setVisibility(View.VISIBLE);
+            pbCopyOnWriteAddMiddle.setVisibility(View.VISIBLE);
+            pbCopyOnWriteAddEnd.setVisibility(View.VISIBLE);
+            pbCopyOnWriteSearchValue.setVisibility(View.VISIBLE);
+            pbCopyOnWriteRemoveBegin.setVisibility(View.VISIBLE);
+            pbCopyOnWriteRemoveMiddle.setVisibility(View.VISIBLE);
+            pbCopyOnWriteRemoveEnd.setVisibility(View.VISIBLE);
+
+            super.onPreExecute();
         }
 
         @Override
-        protected void onPostExecute(Long timeTaskExecution) {
+        protected Object[] doInBackground(String... strings) {
+            String testName = strings[0];
+            Object[] result = new Object[2];
+            switch (testName) {
+                case CollectionsTest.ARRAY_ADD_BEGIN:
+                    result[0] = CollectionsTest.addInTheBegin(CollectionsTest.arrayList);
+                    result[1] = pbArrayAddBegin;
+                    break;
+                case CollectionsTest.ARRAY_ADD_MIDDLE:
+                    result[0] = CollectionsTest.addInTheMiddle(CollectionsTest.arrayList);
+                    result[1] = pbArrayAddMiddle;
+                    break;
+                case CollectionsTest.ARRAY_ADD_END:
+                    result[0] = CollectionsTest.addInTheEnd(CollectionsTest.arrayList);
+                    result[1] = pbArrayAddEnd;
+                    break;
+                case CollectionsTest.ARRAY_SEARCH_VALUE:
+                    result[0] = CollectionsTest.searchByValue(CollectionsTest.arrayList);
+                    result[1] = pbArraySearchValue;
+                    break;
+                case CollectionsTest.ARRAY_REMOVE_BEGIN:
+                    result[0] = CollectionsTest.removeInTheBegin(CollectionsTest.arrayList);
+                    result[1] = pbArrayRemoveBegin;
+                    break;
+                case CollectionsTest.ARRAY_REMOVE_MIDDLE:
+                    result[0] = CollectionsTest.removeInTheMiddle(CollectionsTest.arrayList);
+                    result[1] = pbArrayRemoveMiddle;
+                    break;
+                case CollectionsTest.ARRAY_REMOVE_END:
+                    result[0] = CollectionsTest.removeInTheEnd(CollectionsTest.arrayList);
+                    result[1] = pbArrayRemoveEnd;
+                    break;
+
+                case CollectionsTest.LINKED_ADD_BEGIN:
+                    result[0] = CollectionsTest.addInTheBegin(CollectionsTest.linkedList);
+                    result[1] = pbLinkedAddBegin;
+                    break;
+                case CollectionsTest.LINKED_ADD_MIDDLE:
+                    result[0] = CollectionsTest.addInTheMiddle(CollectionsTest.linkedList);
+                    result[1] = pbLinkedAddMiddle;
+                    break;
+                case CollectionsTest.LINKED_ADD_END:
+                    result[0] = CollectionsTest.addInTheEnd(CollectionsTest.linkedList);
+                    result[1] = pbLinkedAddEnd;
+                    break;
+                case CollectionsTest.LINKED_SEARCH_VALUE:
+                    result[0] = CollectionsTest.searchByValue(CollectionsTest.linkedList);
+                    result[1] = pbLinkedSearchValue;
+                    break;
+                case CollectionsTest.LINKED_REMOVE_BEGIN:
+                    result[0] = CollectionsTest.removeInTheBegin(CollectionsTest.linkedList);
+                    result[1] = pbLinkedRemoveBegin;
+                    break;
+                case CollectionsTest.LINKED_REMOVE_MIDDLE:
+                    result[0] = CollectionsTest.removeInTheMiddle(CollectionsTest.linkedList);
+                    result[1] = pbLinkedRemoveMiddle;
+                    break;
+                case CollectionsTest.LINKED_REMOVE_END:
+                    result[0] = CollectionsTest.removeInTheEnd(CollectionsTest.linkedList);
+                    result[1] = pbLinkedRemoveEnd;
+                    break;
+
+                case CollectionsTest.COPY_ON_WRITE_BEGIN:
+                    result[0] = CollectionsTest.addInTheBegin(CollectionsTest.copyOnWriteArrayList);
+                    result[1] = pbCopyOnWriteAddBegin;
+                    break;
+                case CollectionsTest.COPY_ON_WRITE_ADD_MIDDLE:
+                    result[0] = CollectionsTest.addInTheMiddle(CollectionsTest.copyOnWriteArrayList);
+                    result[1] = pbCopyOnWriteAddMiddle;
+                    break;
+                case CollectionsTest.COPY_ON_WRITE_ADD_END:
+                    result[0] = CollectionsTest.addInTheEnd(CollectionsTest.copyOnWriteArrayList);
+                    result[1] = pbCopyOnWriteAddEnd;
+                    break;
+                case CollectionsTest.COPY_ON_WRITE_SEARCH_VALUE:
+                    result[0] = CollectionsTest.searchByValue(CollectionsTest.copyOnWriteArrayList);
+                    result[1] = pbCopyOnWriteSearchValue;
+                    break;
+                case CollectionsTest.COPY_ON_WRITE_REMOVE_BEGIN:
+                    result[0] = CollectionsTest.removeInTheBegin(CollectionsTest.copyOnWriteArrayList);
+                    result[1] = pbCopyOnWriteRemoveBegin;
+                    break;
+                case CollectionsTest.COPY_ON_WRITE_REMOVE_MIDDLE:
+                    result[0] = CollectionsTest.removeInTheMiddle(CollectionsTest.copyOnWriteArrayList);
+                    result[1] = pbCopyOnWriteRemoveMiddle;
+                    break;
+                case CollectionsTest.COPY_ON_WRITE_REMOVE_END:
+                    result[0] = CollectionsTest.removeInTheEnd(CollectionsTest.copyOnWriteArrayList);
+                    result[1] = pbCopyOnWriteRemoveEnd;
+                    break;
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Object[] result) {
+            Long timeTaskExecution = (Long)result[0];
+            ProgressBar progressBar = (ProgressBar)result[1];
             if (cell != null) {
                 cell.setText(String.valueOf(timeTaskExecution));
+            }
+            if(progressBar != null) {
+                progressBar.setVisibility(View.INVISIBLE);
             }
             Log.d("myLogs", "" + timeTaskExecution);
         }

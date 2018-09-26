@@ -35,14 +35,16 @@ public class CollectionsTest {
     public static final String COPY_ON_WRITE_REMOVE_MIDDLE = "copyOnWriteRemoveMiddle";
     public static final String COPY_ON_WRITE_REMOVE_END = "copyOnWriteRemoveEnd";
 
+    public static Integer numberOfElements = 10000;
+
     public static ArrayList<Integer> arrayList = new ArrayList<>();
     public static LinkedList<Integer> linkedList = new LinkedList<>();
     public static CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
     private static Integer testElement = 1;
 
     public static void fillWithElements(List<Integer> list) {
-        for(int i = 0; i < 100; i++) {
-           // if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
+        for(int i = 0; i < numberOfElements; i++) {
+            if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
             list.add(i);
         }
        Log.d("myLogs", list.getClass() + " filled with elements");

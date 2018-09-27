@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -22,6 +23,8 @@ import com.baulin.alexander.collectionsandmaps.fragments.MapsFragment;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class Main extends AppCompatActivity {
 
@@ -30,12 +33,14 @@ public class Main extends AppCompatActivity {
     private static final String COPY_ARRAY_LIST = "copyArrayList";
     private static final String HASH_MAP = "hashMap";
     private static final String TREE_MAP = "treeMap";
-    SectionsPageAdapter pageAdapter;
 
     @BindView(R.id.progressBar) ProgressBar progressBar;
     @BindView(R.id.container) ViewPager viewPager;
     @BindView(R.id.btnFloatingAction) FloatingActionButton floatingActionButton;
 
+    CollectionsFragment collectionsFragment;
+    MapsFragment mapsFragment;
+    SectionsPageAdapter pageAdapter;
 
 
     @Override
@@ -43,20 +48,23 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        viewPager = findViewById(R.id.container);
-        progressBar = findViewById(R.id.progressBar);
-        floatingActionButton = findViewById(R.id.btnFloatingAction);
+        ButterKnife.bind(this);
+
+        mapsFragment = new MapsFragment();
+        collectionsFragment = new CollectionsFragment();
+        pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        pageAdapter.addFragment(collectionsFragment, "Collections");
+        pageAdapter.addFragment(mapsFragment, "Maps");
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        viewPager.setAdapter(pageAdapter);
 
         viewPager.setVisibility(View.INVISIBLE);
-        TabLayout tabLayout = findViewById(R.id.tabs);
         progressBar.setProgress(0);
         progressBar.setMax(CollectionsTest.numberOfElements);
-        pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        pageAdapter.addFragment(new CollectionsFragment(), "Collections");
-        pageAdapter.addFragment(new MapsFragment(), "Maps");
-        viewPager.setAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
+
         Log.d("myLogs", "onCreate");
+
         new CollectionFillTask().execute(ARRAY_LIST);
         new CollectionFillTask().execute(LINKED_LIST);
         new CollectionFillTask().execute(COPY_ARRAY_LIST);
@@ -64,11 +72,10 @@ public class Main extends AppCompatActivity {
         new CollectionFillTask().execute(TREE_MAP);
     }
 
+    @OnClick(R.id.btnFloatingAction)
     public void onClickFloatingActionButton(View view) {
-        CollectionsFragment c = (CollectionsFragment)pageAdapter.getItem(0);
-        c.calculateTimeOperations();
-        MapsFragment m = (MapsFragment)pageAdapter.getItem(1);
-        m.calculateTimeOperations();
+        collectionsFragment.calculateTimeOperations();
+        mapsFragment.calculateTimeOperations();
     }
 
     @Override
@@ -90,11 +97,7 @@ public class Main extends AppCompatActivity {
                     CollectionsTest.fillWithElements(CollectionsTest.linkedList);
                     break;
                 case COPY_ARRAY_LIST: {
-                    for (int i = 0; i < CollectionsTest.numberOfElements; i++) {
-                        if(CollectionsTest.copyOnWriteArrayList.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", CollectionsTest.copyOnWriteArrayList.getClass()  + "add element " + i);
-                        CollectionsTest.copyOnWriteArrayList.add(i);
-                        onProgressUpdate(CollectionsTest.copyOnWriteArrayList.size());
-                    }
+                    CollectionsTest.fillWithElements(CollectionsTest.copyOnWriteArrayList);
                     return true;
                 }
                 case HASH_MAP:
@@ -110,7 +113,6 @@ public class Main extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-           // Log.d("myLogs","value = " + values[0]);
             progressBar.setProgress(values[0]);
         }
 

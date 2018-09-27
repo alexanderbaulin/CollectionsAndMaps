@@ -46,11 +46,8 @@
         android:id="@+id/progressBar"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        style="?android:progressBarStyleHorizontal"
         app:layout_anchor="@+id/container"
-        app:layout_anchorGravity="center"
-        android:progressDrawable="@drawable/circle"
-        />
+        app:layout_anchorGravity="center" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnFloatingAction"
@@ -59,7 +56,6 @@
         app:layout_anchor="@+id/container"
         app:layout_anchorGravity="right|bottom"
         app:srcCompat="@drawable/ic_add_white_24dp"
-        android:onClick="onClickFloatingActionButton"
         android:layout_margin="16dp"
         android:visibility="invisible" />
 

@@ -35,7 +35,7 @@ public class CollectionsTest {
     public static final String COPY_ON_WRITE_REMOVE_MIDDLE = "copyOnWriteRemoveMiddle";
     public static final String COPY_ON_WRITE_REMOVE_END = "copyOnWriteRemoveEnd";
 
-    public static Integer numberOfElements = 10000;
+    public static Integer numberOfElements = 100000;
 
     public static ArrayList<Integer> arrayList = new ArrayList<>();
     public static LinkedList<Integer> linkedList = new LinkedList<>();

@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import com.baulin.alexander.collectionsandmaps.CollectionsTest;
 import com.baulin.alexander.collectionsandmaps.R;
+import com.baulin.alexander.collectionsandmaps.activities.Main;
+
+import java.util.concurrent.Semaphore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,7 +74,7 @@ public class CollectionsFragment extends Fragment {
     @BindView(R.id.pbCopyOnWriteRemoveEnd) ProgressBar pbCopyOnWriteRemoveEnd;
 
 
-
+    int testOperationsCounter = 0;
 
     @Nullable
     @Override
@@ -148,6 +151,14 @@ public class CollectionsFragment extends Fragment {
         protected Object[] doInBackground(String... strings) {
             String testName = strings[0];
             Object[] result = new Object[2];
+
+            while (true) {
+                if(Main.semaphore.tryAcquire()) {
+                    Log.d("myLogs2", "gotAcquire " + testName + " " + ++testOperationsCounter);
+                    break;
+                }
+            }
+
             switch (testName) {
                 case CollectionsTest.ARRAY_ADD_BEGIN:
                     result[0] = CollectionsTest.addInTheBegin(CollectionsTest.arrayList);
@@ -236,6 +247,8 @@ public class CollectionsFragment extends Fragment {
                     result[1] = pbCopyOnWriteRemoveEnd;
                     break;
             }
+            Main.semaphore.release();
+            Log.d("myLogs2", "semaphor release");
             return result;
         }
 
@@ -251,6 +264,5 @@ public class CollectionsFragment extends Fragment {
             }
             Log.d("myLogs", "" + timeTaskExecution);
         }
-
     }
 }

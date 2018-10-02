@@ -16,6 +16,9 @@ import android.widget.TextView;
 import com.baulin.alexander.collectionsandmaps.CollectionsTest;
 import com.baulin.alexander.collectionsandmaps.MapsTest;
 import com.baulin.alexander.collectionsandmaps.R;
+import com.baulin.alexander.collectionsandmaps.activities.Main;
+
+import java.util.concurrent.Semaphore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +40,9 @@ public class MapsFragment extends Fragment {
     @BindView(R.id.pbTreeMapAdd) ProgressBar pbTreeMapAdd;
     @BindView(R.id.pbTreeMapSearch) ProgressBar pbTreeMapSearch;
     @BindView(R.id.pbTreeMapRemove) ProgressBar pbTreeMapRemove;
+
+
+    int testOperationsCounter = 0;
 
     @Nullable
     @Override
@@ -80,6 +86,14 @@ public class MapsFragment extends Fragment {
         protected Object[] doInBackground(String... strings) {
             String testName = strings[0];
             Object[] result = new Object[2];
+
+            while (true) {
+                if(Main.semaphore.tryAcquire()) {
+                    Log.d("myLogs3", "gotAcquire " + testName + " " + ++testOperationsCounter);
+                    break;
+                }
+            }
+
             switch (testName) {
                 case MapsTest.HASH_MAP_ADD:
                     result[0] = MapsTest.addNew(MapsTest.hashMap);
@@ -106,6 +120,8 @@ public class MapsFragment extends Fragment {
                     result[1] = pbTreeMapRemove;
                     break;
             }
+            Main.semaphore.release();
+            Log.d("myLogs3", "semaphor release");
             return result;
         }
 

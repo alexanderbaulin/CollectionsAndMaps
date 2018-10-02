@@ -20,6 +20,7 @@ import com.baulin.alexander.collectionsandmaps.SectionsPageAdapter;
 import com.baulin.alexander.collectionsandmaps.fragments.CollectionsFragment;
 import com.baulin.alexander.collectionsandmaps.fragments.MapsFragment;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
@@ -37,10 +38,13 @@ public class Main extends AppCompatActivity {
     @BindView(R.id.progressBar) ProgressBar progressBar;
     @BindView(R.id.container) ViewPager viewPager;
     @BindView(R.id.btnFloatingAction) FloatingActionButton floatingActionButton;
+    @BindView(R.id.tabs) TabLayout tabLayout;
 
     CollectionsFragment collectionsFragment;
     MapsFragment mapsFragment;
     SectionsPageAdapter pageAdapter;
+    public static Semaphore semaphore;
+
 
 
     @Override
@@ -50,13 +54,15 @@ public class Main extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        int processorsNumber = Runtime.getRuntime().availableProcessors();
+        semaphore = new Semaphore(processorsNumber, true);
         mapsFragment = new MapsFragment();
         collectionsFragment = new CollectionsFragment();
         pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         pageAdapter.addFragment(collectionsFragment, "Collections");
         pageAdapter.addFragment(mapsFragment, "Maps");
-        TabLayout tabLayout = findViewById(R.id.tabs);
         viewPager.setAdapter(pageAdapter);
+
 
         viewPager.setVisibility(View.INVISIBLE);
         progressBar.setProgress(0);

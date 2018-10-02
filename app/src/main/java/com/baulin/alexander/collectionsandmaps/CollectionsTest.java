@@ -35,7 +35,7 @@ public class CollectionsTest {
     public static final String COPY_ON_WRITE_REMOVE_MIDDLE = "copyOnWriteRemoveMiddle";
     public static final String COPY_ON_WRITE_REMOVE_END = "copyOnWriteRemoveEnd";
 
-    public static Integer numberOfElements = 100000;
+    public static Integer numberOfElements = 10000;
 
     public static ArrayList<Integer> arrayList = new ArrayList<>();
     public static LinkedList<Integer> linkedList = new LinkedList<>();
@@ -47,55 +47,55 @@ public class CollectionsTest {
             if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
             list.add(i);
         }
-       Log.d("myLogs", list.getClass() + " filled with elements");
+        Log.d("myLogs", list.getClass() + " filled with elements");
     }
 
-    public static long addInTheBegin(List<Integer> list) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long addInTheBegin(List<Integer> list) {
+        long timeStart = System.nanoTime();
         list.add(0, testElement);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long addInTheMiddle(List<Integer> list) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long addInTheMiddle(List<Integer> list) {
+        long timeStart = System.nanoTime();
         list.add(list.size()/2, testElement);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long addInTheEnd(List<Integer> list) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long addInTheEnd(List<Integer> list) {
+        long timeStart = System.nanoTime();
         list.add(testElement);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long searchByValue(List<Integer> list) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long searchByValue(List<Integer> list) {
+        long timeStart = System.nanoTime();
         list.indexOf(list.size()/2);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long removeInTheBegin(List<Integer> list) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long removeInTheBegin(List<Integer> list) {
+        long timeStart = System.nanoTime();
         list.remove(0);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long removeInTheEnd(List<Integer> list) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long removeInTheEnd(List<Integer> list) {
+        long timeStart = System.nanoTime();
         list.remove(list.size()-1);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long removeInTheMiddle(List<Integer> list) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long removeInTheMiddle(List<Integer> list) {
+        long timeStart = System.nanoTime();
         list.remove(list.size()/2);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 }

@@ -30,24 +30,24 @@ public class MapsTest {
         Log.d("myLogs", map.getClass() + " filled with elements");
     }
 
-    public static long addNew(Map<Integer, Integer> map) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long addNew(Map<Integer, Integer> map) {
+        long timeStart = System.nanoTime();
         map.put(testKey, testValue);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long searchByKey(Map<Integer, Integer> map) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long searchByKey(Map<Integer, Integer> map) {
+        long timeStart = System.nanoTime();
         map.get(testKey);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 
-    public static long remove(Map<Integer, Integer> map) {
-        long timeStart = System.currentTimeMillis();
+    public synchronized static long remove(Map<Integer, Integer> map) {
+        long timeStart = System.nanoTime();
         map.remove(testKey);
-        long timeEnd = System.currentTimeMillis();
-        return timeEnd - timeStart;
+        long timeEnd = System.nanoTime();
+        return (timeEnd - timeStart)/1000;
     }
 }

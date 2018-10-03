@@ -17,4 +17,5 @@
     <string name="adding_new">adding new</string>
     <string name="search_by_key">search by key</string>
     <string name="removing">removing</string>
+    <string name="submit">Submit</string>
 </resources>

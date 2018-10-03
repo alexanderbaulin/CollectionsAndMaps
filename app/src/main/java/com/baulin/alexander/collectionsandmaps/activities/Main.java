@@ -10,8 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baulin.alexander.collectionsandmaps.CollectionsTest;
 import com.baulin.alexander.collectionsandmaps.MapsTest;
@@ -21,7 +22,6 @@ import com.baulin.alexander.collectionsandmaps.fragments.CollectionsFragment;
 import com.baulin.alexander.collectionsandmaps.fragments.MapsFragment;
 
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,11 +39,14 @@ public class Main extends AppCompatActivity {
     @BindView(R.id.container) ViewPager viewPager;
     @BindView(R.id.btnFloatingAction) FloatingActionButton floatingActionButton;
     @BindView(R.id.tabs) TabLayout tabLayout;
+    @BindView(R.id.btnSubmit) Button submit;
+    @BindView(R.id.editNumber) EditText input;
 
     CollectionsFragment collectionsFragment;
     MapsFragment mapsFragment;
     SectionsPageAdapter pageAdapter;
     public static Semaphore semaphore;
+    public static int numberOfElements;
 
 
 
@@ -63,13 +66,28 @@ public class Main extends AppCompatActivity {
         pageAdapter.addFragment(mapsFragment, "Maps");
         viewPager.setAdapter(pageAdapter);
 
-
         viewPager.setVisibility(View.INVISIBLE);
         progressBar.setProgress(0);
-        progressBar.setMax(CollectionsTest.numberOfElements);
+        progressBar.setMax(Main.numberOfElements);
         tabLayout.setupWithViewPager(viewPager);
 
         Log.d("myLogs", "onCreate");
+
+    }
+
+    @OnClick(R.id.btnSubmit)
+    public void onClickSubmitButton(View view) {
+        String number = input.getText().toString().trim();
+        if(number.equals("")) {
+            Toast.makeText(this, "Enter number", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        numberOfElements = Integer.valueOf(number);
+        Log.d("myLogs5", "button " + numberOfElements);
+
+        input.setVisibility(View.INVISIBLE);
+        submit.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
 
         new CollectionFillTask().execute(ARRAY_LIST);
         new CollectionFillTask().execute(LINKED_LIST);
@@ -80,8 +98,12 @@ public class Main extends AppCompatActivity {
 
     @OnClick(R.id.btnFloatingAction)
     public void onClickFloatingActionButton(View view) {
-        collectionsFragment.calculateTimeOperations();
-        mapsFragment.calculateTimeOperations();
+        TabLayout.Tab tabCollection = tabLayout.getTabAt(0);
+        if(tabCollection == null) return;
+        if(tabCollection.isSelected())
+            collectionsFragment.calculateTimeOperations();
+        else
+            mapsFragment.calculateTimeOperations();
     }
 
     @Override

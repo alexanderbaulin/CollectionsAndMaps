@@ -4,6 +4,8 @@ package com.baulin.alexander.collectionsandmaps;
 
 import android.util.Log;
 
+import com.baulin.alexander.collectionsandmaps.activities.Main;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,15 +37,13 @@ public class CollectionsTest {
     public static final String COPY_ON_WRITE_REMOVE_MIDDLE = "copyOnWriteRemoveMiddle";
     public static final String COPY_ON_WRITE_REMOVE_END = "copyOnWriteRemoveEnd";
 
-    public static Integer numberOfElements = 10000;
-
     public static ArrayList<Integer> arrayList = new ArrayList<>();
     public static LinkedList<Integer> linkedList = new LinkedList<>();
     public static CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
     private static Integer testElement = 1;
 
     public static void fillWithElements(List<Integer> list) {
-        for(int i = 0; i < numberOfElements; i++) {
+        for(int i = 0; i < Main.numberOfElements; i++) {
             if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
             list.add(i);
         }

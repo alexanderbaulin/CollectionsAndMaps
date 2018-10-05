@@ -1,10 +1,10 @@
-package com.baulin.alexander.collectionsandmaps;
+package com.baulin.alexander.collectionsandmaps.model;
 
 
 
 import android.util.Log;
 
-import com.baulin.alexander.collectionsandmaps.activities.Main;
+import com.baulin.alexander.collectionsandmaps.controller.Main;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,30 +13,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class CollectionsTest {
-    public static final String ARRAY_ADD_BEGIN = "arrayAddBegin";
-    public static final String ARRAY_ADD_MIDDLE = "arrayAddMiddle";
-    public static final String ARRAY_ADD_END = "arrayAddEnd";
-    public static final String ARRAY_SEARCH_VALUE = "arraySearchValue";
-    public static final String ARRAY_REMOVE_BEGIN = "arrayRemoveBegin";
-    public static final String ARRAY_REMOVE_MIDDLE = "arrayRemoveMiddle";
-    public static final String ARRAY_REMOVE_END = "arrayRemoveEnd";
-
-    public static final String LINKED_ADD_BEGIN = "linkedAddBegin";
-    public static final String LINKED_ADD_MIDDLE = "linkedAddMiddle";
-    public static final String LINKED_ADD_END = "linkedAddEnd";
-    public static final String LINKED_SEARCH_VALUE = "linkedSearchValue";
-    public static final String LINKED_REMOVE_BEGIN = "linkedRemoveBegin";
-    public static final String LINKED_REMOVE_MIDDLE = "linkedRemoveMiddle";
-    public static final String LINKED_REMOVE_END = "linkedRemoveEnd";
-
-    public static final String COPY_ON_WRITE_BEGIN = "copyOnWriteAddBegin";
-    public static final String COPY_ON_WRITE_ADD_MIDDLE = "copyOnWriteAddMiddle";
-    public static final String COPY_ON_WRITE_ADD_END = "copyOnWriteAddEnd";
-    public static final String COPY_ON_WRITE_SEARCH_VALUE = "copyOnWriteSearchValue";
-    public static final String COPY_ON_WRITE_REMOVE_BEGIN = "copyOnWriteRemoveBegin";
-    public static final String COPY_ON_WRITE_REMOVE_MIDDLE = "copyOnWriteRemoveMiddle";
-    public static final String COPY_ON_WRITE_REMOVE_END = "copyOnWriteRemoveEnd";
-
     public static ArrayList<Integer> arrayList = new ArrayList<>();
     public static LinkedList<Integer> linkedList = new LinkedList<>();
     public static CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();

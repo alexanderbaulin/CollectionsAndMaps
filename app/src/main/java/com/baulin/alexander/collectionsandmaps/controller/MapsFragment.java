@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.fragments;
+package com.baulin.alexander.collectionsandmaps.controller;
 
 
 import android.os.AsyncTask;
@@ -13,15 +13,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.baulin.alexander.collectionsandmaps.CollectionsTest;
-import com.baulin.alexander.collectionsandmaps.MapsTest;
+import com.baulin.alexander.collectionsandmaps.model.MapsTest;
 import com.baulin.alexander.collectionsandmaps.R;
-import com.baulin.alexander.collectionsandmaps.activities.Main;
-
-import java.util.concurrent.Semaphore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+import static com.baulin.alexander.collectionsandmaps.model.Constants.*;
 
 public class MapsFragment extends Fragment {
 
@@ -41,6 +40,7 @@ public class MapsFragment extends Fragment {
     @BindView(R.id.pbTreeMapSearch) ProgressBar pbTreeMapSearch;
     @BindView(R.id.pbTreeMapRemove) ProgressBar pbTreeMapRemove;
 
+    private Unbinder unbinder;
 
     int testOperationsCounter = 0;
 
@@ -48,18 +48,24 @@ public class MapsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.maps, container, false);
-        ButterKnife.bind(this, view);
+        //ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
-    public void calculateTimeOperations() {
-        new TaskExecutor(hashMapAdd).execute(MapsTest.HASH_MAP_ADD);
-        new TaskExecutor(hashMapSearch).execute(MapsTest.HASH_MAP_SEARCH);
-        new TaskExecutor(hashMapRemove).execute(MapsTest.HASH_MAP_REMOVE);
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 
-        new TaskExecutor(treeMapAdd).execute(MapsTest.TREE_MAP_ADD);
-        new TaskExecutor(treeMapSearch).execute(MapsTest.TREE_MAP_SEARCH);
-        new TaskExecutor(treeMapRemove).execute(MapsTest.TREE_MAP_REMOVE);
+    public void calculateTimeOperations() {
+        new TaskExecutor(hashMapAdd).execute(HASH_MAP_ADD);
+        new TaskExecutor(hashMapSearch).execute(HASH_MAP_SEARCH);
+        new TaskExecutor(hashMapRemove).execute(HASH_MAP_REMOVE);
+
+        new TaskExecutor(treeMapAdd).execute(TREE_MAP_ADD);
+        new TaskExecutor(treeMapSearch).execute(TREE_MAP_SEARCH);
+        new TaskExecutor(treeMapRemove).execute(TREE_MAP_REMOVE);
     }
 
     private class TaskExecutor extends AsyncTask<String, Void, Object[]> {
@@ -95,27 +101,27 @@ public class MapsFragment extends Fragment {
             }
 
             switch (testName) {
-                case MapsTest.HASH_MAP_ADD:
+                case HASH_MAP_ADD:
                     result[0] = MapsTest.addNew(MapsTest.hashMap);
                     result[1] = pbHashMapAdd;
                     break;
-                case MapsTest.HASH_MAP_SEARCH:
+                case HASH_MAP_SEARCH:
                     result[0] = MapsTest.searchByKey(MapsTest.hashMap);
                     result[1] = pbHashMapSearch;
                     break;
-                case MapsTest.HASH_MAP_REMOVE:
+                case HASH_MAP_REMOVE:
                     result[0] = MapsTest.remove(MapsTest.hashMap);
                     result[1] = pbHashMapRemove;
                     break;
-                case MapsTest.TREE_MAP_ADD:
+                case TREE_MAP_ADD:
                     result[0] = MapsTest.addNew(MapsTest.treeMap);
                     result[1] = pbTreeMapAdd;
                     break;
-                case MapsTest.TREE_MAP_SEARCH:
+                case TREE_MAP_SEARCH:
                     result[0] = MapsTest.searchByKey(MapsTest.treeMap);
                     result[1] = pbTreeMapSearch;
                     break;
-                case MapsTest.TREE_MAP_REMOVE:
+                case TREE_MAP_REMOVE:
                     result[0] = MapsTest.remove(MapsTest.treeMap);
                     result[1] = pbTreeMapRemove;
                     break;

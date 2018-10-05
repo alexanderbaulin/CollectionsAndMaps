@@ -1,25 +1,17 @@
-package com.baulin.alexander.collectionsandmaps.activities;
+package com.baulin.alexander.collectionsandmaps.controller;
 
 import android.os.AsyncTask;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.baulin.alexander.collectionsandmaps.CollectionsTest;
-import com.baulin.alexander.collectionsandmaps.MapsTest;
+import com.baulin.alexander.collectionsandmaps.model.CollectionsTest;
+import com.baulin.alexander.collectionsandmaps.model.MapsTest;
 import com.baulin.alexander.collectionsandmaps.R;
-import com.baulin.alexander.collectionsandmaps.SectionsPageAdapter;
-import com.baulin.alexander.collectionsandmaps.fragments.CollectionsFragment;
-import com.baulin.alexander.collectionsandmaps.fragments.MapsFragment;
+import com.baulin.alexander.collectionsandmaps.view.MainView;
 
 import java.util.concurrent.Semaphore;
 
@@ -27,24 +19,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.baulin.alexander.collectionsandmaps.model.Constants.*;
+
+
 public class Main extends AppCompatActivity {
 
-    private static final String ARRAY_LIST = "arrayList";
-    private static final String LINKED_LIST = "linkedList";
-    private static final String COPY_ARRAY_LIST = "copyArrayList";
-    private static final String HASH_MAP = "hashMap";
-    private static final String TREE_MAP = "treeMap";
-
-    @BindView(R.id.progressBar) ProgressBar progressBar;
-    @BindView(R.id.container) ViewPager viewPager;
-    @BindView(R.id.btnFloatingAction) FloatingActionButton floatingActionButton;
-    @BindView(R.id.tabs) TabLayout tabLayout;
-    @BindView(R.id.btnSubmit) Button submit;
-    @BindView(R.id.editNumber) EditText input;
 
     CollectionsFragment collectionsFragment;
     MapsFragment mapsFragment;
     SectionsPageAdapter pageAdapter;
+    MainView mainView;
     public static Semaphore semaphore;
     public static int numberOfElements;
 
@@ -54,6 +38,7 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        Log.d("myLogs", "onCreate");
 
         ButterKnife.bind(this);
 
@@ -62,53 +47,33 @@ public class Main extends AppCompatActivity {
         mapsFragment = new MapsFragment();
         collectionsFragment = new CollectionsFragment();
         pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        mainView = new MainView(this);
         pageAdapter.addFragment(collectionsFragment, "Collections");
         pageAdapter.addFragment(mapsFragment, "Maps");
-        viewPager.setAdapter(pageAdapter);
-
-        viewPager.setVisibility(View.INVISIBLE);
-        progressBar.setProgress(0);
-        progressBar.setMax(Main.numberOfElements);
-        tabLayout.setupWithViewPager(viewPager);
-
-        Log.d("myLogs", "onCreate");
-
+        mainView.setPageAdapter(pageAdapter);
     }
 
     @OnClick(R.id.btnSubmit)
     public void onClickSubmitButton(View view) {
-        String number = input.getText().toString().trim();
-        if(number.equals("")) {
-            Toast.makeText(this, "Enter number", Toast.LENGTH_SHORT).show();
-            return;
+        if(mainView.submitButtonClicked()) {
+            new CollectionFillTask().execute(ARRAY_LIST);
+            new CollectionFillTask().execute(LINKED_LIST);
+            new CollectionFillTask().execute(COPY_ARRAY_LIST);
+            new CollectionFillTask().execute(HASH_MAP);
+            new CollectionFillTask().execute(TREE_MAP);
         }
-        numberOfElements = Integer.valueOf(number);
-        Log.d("myLogs5", "button " + numberOfElements);
-
-        input.setVisibility(View.INVISIBLE);
-        submit.setVisibility(View.INVISIBLE);
-        progressBar.setVisibility(View.VISIBLE);
-
-        new CollectionFillTask().execute(ARRAY_LIST);
-        new CollectionFillTask().execute(LINKED_LIST);
-        new CollectionFillTask().execute(COPY_ARRAY_LIST);
-        new CollectionFillTask().execute(HASH_MAP);
-        new CollectionFillTask().execute(TREE_MAP);
     }
 
     @OnClick(R.id.btnFloatingAction)
     public void onClickFloatingActionButton(View view) {
-        TabLayout.Tab tabCollection = tabLayout.getTabAt(0);
-        if(tabCollection == null) return;
-        if(tabCollection.isSelected())
+        if(mainView.isTabCollectionSelected()) {
             collectionsFragment.calculateTimeOperations();
-        else
+        } else
             mapsFragment.calculateTimeOperations();
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        progressBar.setProgress(0);
         Log.d("myLogs", "restore");
         super.onRestoreInstanceState(savedInstanceState);
     }
@@ -141,15 +106,13 @@ public class Main extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            progressBar.setProgress(values[0]);
+            //progressBar.setProgress(values[0]);
         }
 
         @Override
         protected void onPostExecute(Boolean result) {
             if(result) {
-                progressBar.setVisibility(View.GONE);
-                viewPager.setVisibility(View.VISIBLE);
-                floatingActionButton.setVisibility(View.VISIBLE);
+                mainView.setPostExecuteUI();
             }
         }
     }

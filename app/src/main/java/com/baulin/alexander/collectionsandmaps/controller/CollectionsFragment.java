@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.fragments;
+package com.baulin.alexander.collectionsandmaps.controller;
 
 
 import android.os.AsyncTask;
@@ -14,14 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import com.baulin.alexander.collectionsandmaps.CollectionsTest;
+import com.baulin.alexander.collectionsandmaps.model.CollectionsTest;
 import com.baulin.alexander.collectionsandmaps.R;
-import com.baulin.alexander.collectionsandmaps.activities.Main;
-
-import java.util.concurrent.Semaphore;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
+import static com.baulin.alexander.collectionsandmaps.model.Constants.*;
 
 public class CollectionsFragment extends Fragment {
 
@@ -73,6 +73,8 @@ public class CollectionsFragment extends Fragment {
     @BindView(R.id.pbCopyOnWriteRemoveMiddle) ProgressBar pbCopyOnWriteRemoveMiddle;
     @BindView(R.id.pbCopyOnWriteRemoveEnd) ProgressBar pbCopyOnWriteRemoveEnd;
 
+    private Unbinder unbinder;
+
 
     int testOperationsCounter = 0;
 
@@ -80,34 +82,42 @@ public class CollectionsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.collections, container, false);
-        ButterKnife.bind(this, view);
+        //ButterKnife.bind(this, view);
+        Log.d("myLogs6", "onCreateView");
+        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        Log.d("myLogs6", "onDestroyView");
+        unbinder.unbind();
+    }
+
     public void calculateTimeOperations() {
-        new TaskExecutor(arrayAddBegin).execute(CollectionsTest.ARRAY_ADD_BEGIN);
-        new TaskExecutor(arrayAddMiddle).execute(CollectionsTest.ARRAY_ADD_MIDDLE);
-        new TaskExecutor(arrayAddEnd).execute(CollectionsTest.ARRAY_ADD_END);
-        new TaskExecutor(arraySearchValue).execute(CollectionsTest.ARRAY_SEARCH_VALUE);
-        new TaskExecutor(arrayRemoveBegin).execute(CollectionsTest.ARRAY_REMOVE_BEGIN);
-        new TaskExecutor(arrayRemoveMiddle).execute(CollectionsTest.ARRAY_REMOVE_MIDDLE);
-        new TaskExecutor(arrayRemoveEnd).execute(CollectionsTest.ARRAY_REMOVE_END);
+        new TaskExecutor(arrayAddBegin).execute(ARRAY_ADD_BEGIN);
+        new TaskExecutor(arrayAddMiddle).execute(ARRAY_ADD_MIDDLE);
+        new TaskExecutor(arrayAddEnd).execute(ARRAY_ADD_END);
+        new TaskExecutor(arraySearchValue).execute(ARRAY_SEARCH_VALUE);
+        new TaskExecutor(arrayRemoveBegin).execute(ARRAY_REMOVE_BEGIN);
+        new TaskExecutor(arrayRemoveMiddle).execute(ARRAY_REMOVE_MIDDLE);
+        new TaskExecutor(arrayRemoveEnd).execute(ARRAY_REMOVE_END);
 
-        new TaskExecutor(linkedAddBegin).execute(CollectionsTest.LINKED_ADD_BEGIN);
-        new TaskExecutor(linkedAddMiddle).execute(CollectionsTest.LINKED_ADD_MIDDLE);
-        new TaskExecutor(linkedAddEnd).execute(CollectionsTest.LINKED_ADD_END);
-        new TaskExecutor(linkedSearchValue).execute(CollectionsTest.LINKED_SEARCH_VALUE);
-        new TaskExecutor(linkedRemoveBegin).execute(CollectionsTest.LINKED_REMOVE_BEGIN);
-        new TaskExecutor(linkedRemoveMiddle).execute(CollectionsTest.LINKED_REMOVE_MIDDLE);
-        new TaskExecutor(linkedRemoveEnd).execute(CollectionsTest.LINKED_REMOVE_END);
+        new TaskExecutor(linkedAddBegin).execute(LINKED_ADD_BEGIN);
+        new TaskExecutor(linkedAddMiddle).execute(LINKED_ADD_MIDDLE);
+        new TaskExecutor(linkedAddEnd).execute(LINKED_ADD_END);
+        new TaskExecutor(linkedSearchValue).execute(LINKED_SEARCH_VALUE);
+        new TaskExecutor(linkedRemoveBegin).execute(LINKED_REMOVE_BEGIN);
+        new TaskExecutor(linkedRemoveMiddle).execute(LINKED_REMOVE_MIDDLE);
+        new TaskExecutor(linkedRemoveEnd).execute(LINKED_REMOVE_END);
 
-        new TaskExecutor(copyOnWriteAddBegin).execute(CollectionsTest.COPY_ON_WRITE_BEGIN);
-        new TaskExecutor(copyOnWriteAddMiddle).execute(CollectionsTest.COPY_ON_WRITE_ADD_MIDDLE);
-        new TaskExecutor(copyOnWriteAddEnd).execute(CollectionsTest.COPY_ON_WRITE_ADD_END);
-        new TaskExecutor(copyOnWriteSearchValue).execute(CollectionsTest.COPY_ON_WRITE_SEARCH_VALUE);
-        new TaskExecutor(copyOnWriteRemoveBegin).execute(CollectionsTest.COPY_ON_WRITE_REMOVE_BEGIN);
-        new TaskExecutor(copyOnWriteRemoveMiddle).execute(CollectionsTest.COPY_ON_WRITE_REMOVE_MIDDLE);
-        new TaskExecutor(copyOnWriteRemoveEnd).execute(CollectionsTest.COPY_ON_WRITE_REMOVE_END);
+        new TaskExecutor(copyOnWriteAddBegin).execute(COPY_ON_WRITE_BEGIN);
+        new TaskExecutor(copyOnWriteAddMiddle).execute(COPY_ON_WRITE_ADD_MIDDLE);
+        new TaskExecutor(copyOnWriteAddEnd).execute(COPY_ON_WRITE_ADD_END);
+        new TaskExecutor(copyOnWriteSearchValue).execute(COPY_ON_WRITE_SEARCH_VALUE);
+        new TaskExecutor(copyOnWriteRemoveBegin).execute(COPY_ON_WRITE_REMOVE_BEGIN);
+        new TaskExecutor(copyOnWriteRemoveMiddle).execute(COPY_ON_WRITE_REMOVE_MIDDLE);
+        new TaskExecutor(copyOnWriteRemoveEnd).execute(COPY_ON_WRITE_REMOVE_END);
 
     }
 
@@ -120,6 +130,7 @@ public class CollectionsFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
+            if(pbArrayAddBegin == null) return;
             pbArrayAddBegin.setVisibility(View.VISIBLE);
             pbArrayAddMiddle.setVisibility(View.VISIBLE);
             pbArrayAddEnd.setVisibility(View.VISIBLE);
@@ -160,89 +171,89 @@ public class CollectionsFragment extends Fragment {
             }
 
             switch (testName) {
-                case CollectionsTest.ARRAY_ADD_BEGIN:
+                case ARRAY_ADD_BEGIN:
                     result[0] = CollectionsTest.addInTheBegin(CollectionsTest.arrayList);
                     result[1] = pbArrayAddBegin;
                     break;
-                case CollectionsTest.ARRAY_ADD_MIDDLE:
+                case ARRAY_ADD_MIDDLE:
                     result[0] = CollectionsTest.addInTheMiddle(CollectionsTest.arrayList);
                     result[1] = pbArrayAddMiddle;
                     break;
-                case CollectionsTest.ARRAY_ADD_END:
+                case ARRAY_ADD_END:
                     result[0] = CollectionsTest.addInTheEnd(CollectionsTest.arrayList);
                     result[1] = pbArrayAddEnd;
                     break;
-                case CollectionsTest.ARRAY_SEARCH_VALUE:
+                case ARRAY_SEARCH_VALUE:
                     result[0] = CollectionsTest.searchByValue(CollectionsTest.arrayList);
                     result[1] = pbArraySearchValue;
                     break;
-                case CollectionsTest.ARRAY_REMOVE_BEGIN:
+                case ARRAY_REMOVE_BEGIN:
                     result[0] = CollectionsTest.removeInTheBegin(CollectionsTest.arrayList);
                     result[1] = pbArrayRemoveBegin;
                     break;
-                case CollectionsTest.ARRAY_REMOVE_MIDDLE:
+                case ARRAY_REMOVE_MIDDLE:
                     result[0] = CollectionsTest.removeInTheMiddle(CollectionsTest.arrayList);
                     result[1] = pbArrayRemoveMiddle;
                     break;
-                case CollectionsTest.ARRAY_REMOVE_END:
+                case ARRAY_REMOVE_END:
                     result[0] = CollectionsTest.removeInTheEnd(CollectionsTest.arrayList);
                     result[1] = pbArrayRemoveEnd;
                     break;
 
-                case CollectionsTest.LINKED_ADD_BEGIN:
+                case LINKED_ADD_BEGIN:
                     result[0] = CollectionsTest.addInTheBegin(CollectionsTest.linkedList);
                     result[1] = pbLinkedAddBegin;
                     break;
-                case CollectionsTest.LINKED_ADD_MIDDLE:
+                case LINKED_ADD_MIDDLE:
                     result[0] = CollectionsTest.addInTheMiddle(CollectionsTest.linkedList);
                     result[1] = pbLinkedAddMiddle;
                     break;
-                case CollectionsTest.LINKED_ADD_END:
+                case LINKED_ADD_END:
                     result[0] = CollectionsTest.addInTheEnd(CollectionsTest.linkedList);
                     result[1] = pbLinkedAddEnd;
                     break;
-                case CollectionsTest.LINKED_SEARCH_VALUE:
+                case LINKED_SEARCH_VALUE:
                     result[0] = CollectionsTest.searchByValue(CollectionsTest.linkedList);
                     result[1] = pbLinkedSearchValue;
                     break;
-                case CollectionsTest.LINKED_REMOVE_BEGIN:
+                case LINKED_REMOVE_BEGIN:
                     result[0] = CollectionsTest.removeInTheBegin(CollectionsTest.linkedList);
                     result[1] = pbLinkedRemoveBegin;
                     break;
-                case CollectionsTest.LINKED_REMOVE_MIDDLE:
+                case LINKED_REMOVE_MIDDLE:
                     result[0] = CollectionsTest.removeInTheMiddle(CollectionsTest.linkedList);
                     result[1] = pbLinkedRemoveMiddle;
                     break;
-                case CollectionsTest.LINKED_REMOVE_END:
+                case LINKED_REMOVE_END:
                     result[0] = CollectionsTest.removeInTheEnd(CollectionsTest.linkedList);
                     result[1] = pbLinkedRemoveEnd;
                     break;
 
-                case CollectionsTest.COPY_ON_WRITE_BEGIN:
+                case COPY_ON_WRITE_BEGIN:
                     result[0] = CollectionsTest.addInTheBegin(CollectionsTest.copyOnWriteArrayList);
                     result[1] = pbCopyOnWriteAddBegin;
                     break;
-                case CollectionsTest.COPY_ON_WRITE_ADD_MIDDLE:
+                case COPY_ON_WRITE_ADD_MIDDLE:
                     result[0] = CollectionsTest.addInTheMiddle(CollectionsTest.copyOnWriteArrayList);
                     result[1] = pbCopyOnWriteAddMiddle;
                     break;
-                case CollectionsTest.COPY_ON_WRITE_ADD_END:
+                case COPY_ON_WRITE_ADD_END:
                     result[0] = CollectionsTest.addInTheEnd(CollectionsTest.copyOnWriteArrayList);
                     result[1] = pbCopyOnWriteAddEnd;
                     break;
-                case CollectionsTest.COPY_ON_WRITE_SEARCH_VALUE:
+                case COPY_ON_WRITE_SEARCH_VALUE:
                     result[0] = CollectionsTest.searchByValue(CollectionsTest.copyOnWriteArrayList);
                     result[1] = pbCopyOnWriteSearchValue;
                     break;
-                case CollectionsTest.COPY_ON_WRITE_REMOVE_BEGIN:
+                case COPY_ON_WRITE_REMOVE_BEGIN:
                     result[0] = CollectionsTest.removeInTheBegin(CollectionsTest.copyOnWriteArrayList);
                     result[1] = pbCopyOnWriteRemoveBegin;
                     break;
-                case CollectionsTest.COPY_ON_WRITE_REMOVE_MIDDLE:
+                case COPY_ON_WRITE_REMOVE_MIDDLE:
                     result[0] = CollectionsTest.removeInTheMiddle(CollectionsTest.copyOnWriteArrayList);
                     result[1] = pbCopyOnWriteRemoveMiddle;
                     break;
-                case CollectionsTest.COPY_ON_WRITE_REMOVE_END:
+                case COPY_ON_WRITE_REMOVE_END:
                     result[0] = CollectionsTest.removeInTheEnd(CollectionsTest.copyOnWriteArrayList);
                     result[1] = pbCopyOnWriteRemoveEnd;
                     break;
@@ -258,7 +269,7 @@ public class CollectionsFragment extends Fragment {
             ProgressBar progressBar = (ProgressBar)result[1];
             if (cell != null) {
                 cell.setText(String.valueOf(timeTaskExecution));
-            }
+            } else Log.d("myLogs6", "cell = null");
             if(progressBar != null) {
                 progressBar.setVisibility(View.INVISIBLE);
             }

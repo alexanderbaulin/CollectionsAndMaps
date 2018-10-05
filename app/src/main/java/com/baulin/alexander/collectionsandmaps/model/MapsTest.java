@@ -1,25 +1,15 @@
-package com.baulin.alexander.collectionsandmaps;
+package com.baulin.alexander.collectionsandmaps.model;
 
 
 import android.util.Log;
 
-import com.baulin.alexander.collectionsandmaps.activities.Main;
+import com.baulin.alexander.collectionsandmaps.controller.Main;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class MapsTest {
-
-    public static final String HASH_MAP_ADD = "hashMapAdd";
-    public static final String HASH_MAP_SEARCH = "hashMapSearch";
-    public static final String HASH_MAP_REMOVE = "hashMapRemove";
-
-    public static final String TREE_MAP_ADD = "treeMapAdd";
-    public static final String TREE_MAP_SEARCH = "treeMapSearch";
-    public static final String TREE_MAP_REMOVE = "treeMapRemove";
-
-
     public static HashMap<Integer, Integer> hashMap = new HashMap<>();
     public static TreeMap<Integer, Integer> treeMap = new TreeMap<>();
     private static Integer testKey = 1;

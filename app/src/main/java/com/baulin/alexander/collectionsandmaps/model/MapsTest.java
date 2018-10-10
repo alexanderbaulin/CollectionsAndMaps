@@ -3,8 +3,6 @@ package com.baulin.alexander.collectionsandmaps.model;
 
 import android.util.Log;
 
-import com.baulin.alexander.collectionsandmaps.controller.Main;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,7 +14,7 @@ public class MapsTest {
     private static Integer testValue = 1;
 
     public static void fillWithElements(Map<Integer, Integer> map) {
-        for(int i = 0; i < Main.numberOfElements; i++) {
+        for(int i = 0; i < CollectionsAndMapsTests.number; i++) {
             map.put(i, i);
         }
         Log.d("myLogs", map.getClass() + " filled with elements");

@@ -1,16 +1,15 @@
-package com.baulin.alexander.collectionsandmaps.controller;
+package com.baulin.alexander.collectionsandmaps.ui;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class SectionsPageAdapter extends FragmentPagerAdapter {
+class SectionsPageAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragmentList = new ArrayList<>();
     private List<String> fragmentTitles = new ArrayList<>();
 

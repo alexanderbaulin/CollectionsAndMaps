@@ -4,8 +4,6 @@ package com.baulin.alexander.collectionsandmaps.model;
 
 import android.util.Log;
 
-import com.baulin.alexander.collectionsandmaps.controller.Main;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class CollectionsTest {
     private static Integer testElement = 1;
 
     public static void fillWithElements(List<Integer> list) {
-        for(int i = 0; i < Main.numberOfElements; i++) {
+        for(int i = 0; i < CollectionsAndMapsTests.number; i++) {
             if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
             list.add(i);
         }

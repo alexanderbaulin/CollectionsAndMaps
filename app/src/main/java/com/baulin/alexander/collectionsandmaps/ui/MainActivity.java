@@ -92,20 +92,21 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
     @Override
     public ProgressBar getProgressBar(int id) {
-        ProgressBar view = mapsFragment.getView().findViewById(id);
+        ProgressBar view = mapsFragment.getProgressBar(id);
         if(view != null)
             return view;
         else
-            return collectionsFragment.getView().findViewById(id);
+            return collectionsFragment.getProgressBar(id);
+
     }
 
     @Override
     public TextView getTextView(int id) {
-        TextView view = mapsFragment.getView().findViewById(id);
+        TextView view = mapsFragment.getTextView(id);
         if(view != null)
             return view;
         else
-            return collectionsFragment.getView().findViewById(id);
+            return collectionsFragment.getTextView(id);
     }
 
     @Override

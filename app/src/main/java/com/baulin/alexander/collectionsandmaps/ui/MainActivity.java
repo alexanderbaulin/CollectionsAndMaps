@@ -91,25 +91,6 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     }
 
     @Override
-    public ProgressBar getProgressBar(int id) {
-        ProgressBar view = mapsFragment.getProgressBar(id);
-        if(view != null)
-            return view;
-        else
-            return collectionsFragment.getProgressBar(id);
-
-    }
-
-    @Override
-    public TextView getTextView(int id) {
-        TextView view = mapsFragment.getTextView(id);
-        if(view != null)
-            return view;
-        else
-            return collectionsFragment.getTextView(id);
-    }
-
-    @Override
     public void setPreSubmitClickedUI() {
         input.setVisibility(VISIBLE);
         submit.setVisibility(VISIBLE);
@@ -131,4 +112,30 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         floatingActionButton.setVisibility(VISIBLE);
     }
 
+    @Override
+    public void setProgressIndicator(int pbID, int visibility) {
+        getProgressBar(pbID).setVisibility(visibility);
+    }
+
+    @Override
+    public void setTestResult(int txtID, String result) {
+        getTextView(txtID).setText(result);
+    }
+
+    private ProgressBar getProgressBar(int id) {
+        ProgressBar view = mapsFragment.getProgressBar(id);
+        if(view != null)
+            return view;
+        else
+            return collectionsFragment.getProgressBar(id);
+
+    }
+
+    private TextView getTextView(int id) {
+        TextView view = mapsFragment.getTextView(id);
+        if(view != null)
+            return view;
+        else
+            return collectionsFragment.getTextView(id);
+    }
 }

@@ -10,9 +10,9 @@ public interface View {
     void showToast(String message);
     boolean isTabCollectionSelected();
     String getInputNumber();
-    ProgressBar getProgressBar(int id);
-    TextView getTextView(int id);
     void setPostSubmitClickedUI();
     void setPreSubmitClickedUI();
     void setPostLoadingUI();
+    void setProgressIndicator(int pbID, int visible);
+    void setTestResult(int txtID, String result);
 }

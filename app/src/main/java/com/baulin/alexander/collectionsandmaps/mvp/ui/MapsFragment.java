@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.ui;
+package com.baulin.alexander.collectionsandmaps.mvp.ui;
 
 
 

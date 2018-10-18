@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.interfaces;
+package com.baulin.alexander.collectionsandmaps.mvp.interfaces;
 
 
 public interface Presenter {

@@ -1,22 +1,22 @@
-package com.baulin.alexander.collectionsandmaps.presenter;
+package com.baulin.alexander.collectionsandmaps.mvp.presenter;
 
 
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.baulin.alexander.collectionsandmaps.interfaces.Model;
-import com.baulin.alexander.collectionsandmaps.interfaces.View;
-import com.baulin.alexander.collectionsandmaps.model.CollectionsAndMapsTests;
-import com.baulin.alexander.collectionsandmaps.model.CollectionsTest;
-import com.baulin.alexander.collectionsandmaps.model.MapsTest;
+import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
+import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
+import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
+import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsTest;
+import com.baulin.alexander.collectionsandmaps.mvp.model.MapsTest;
 import com.baulin.alexander.collectionsandmaps.R;
 
 import java.util.concurrent.Semaphore;
 
 import static android.view.View.*;
-import static com.baulin.alexander.collectionsandmaps.model.Constants.*;
+import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
 
-public class Presenter implements com.baulin.alexander.collectionsandmaps.interfaces.Presenter {
+public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.Presenter {
     private View view;
     private Model model;
     private Semaphore semaphore;
@@ -35,7 +35,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.interf
             view.showToast("Enter number");
             return;
         }
-        model.setNumberOfElement(Integer.valueOf(number));
+        model.setNumberOfElements(Integer.valueOf(number));
         Log.d("myLogs5", "button " + Integer.valueOf(number));
         view.setPostSubmitClickedUI();
         fillCollectionsAndMaps();

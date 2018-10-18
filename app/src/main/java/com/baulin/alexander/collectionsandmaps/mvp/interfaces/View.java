@@ -1,9 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.interfaces;
-
-
-
-import android.widget.ProgressBar;
-import android.widget.TextView;
+package com.baulin.alexander.collectionsandmaps.mvp.interfaces;
 
 
 public interface View {

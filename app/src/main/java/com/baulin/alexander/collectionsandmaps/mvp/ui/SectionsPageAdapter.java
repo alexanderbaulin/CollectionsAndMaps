@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.ui;
+package com.baulin.alexander.collectionsandmaps.mvp.ui;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.model;
+package com.baulin.alexander.collectionsandmaps.mvp.model;
 
 
 public class Constants {

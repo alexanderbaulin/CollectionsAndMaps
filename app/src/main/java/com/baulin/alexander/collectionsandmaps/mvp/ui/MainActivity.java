@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.ui;
+package com.baulin.alexander.collectionsandmaps.mvp.ui;
 
 
 import android.os.Bundle;
@@ -14,7 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baulin.alexander.collectionsandmaps.presenter.Presenter;
+
+import com.baulin.alexander.collectionsandmaps.App;
+import com.baulin.alexander.collectionsandmaps.mvp.presenter.Presenter;
 import com.baulin.alexander.collectionsandmaps.R;
 
 import butterknife.BindView;
@@ -26,7 +28,7 @@ import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
 
-public class MainActivity extends AppCompatActivity implements com.baulin.alexander.collectionsandmaps.interfaces.View {
+public class MainActivity extends AppCompatActivity implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.View {
     CollectionsFragment collectionsFragment;
     MapsFragment mapsFragment;
     SectionsPageAdapter pageAdapter;
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         viewPager.setAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
+
+       new App().onCreate();
+        //AndroidInjection.inject(this);
     }
 
     @OnClick(R.id.btnSubmit)

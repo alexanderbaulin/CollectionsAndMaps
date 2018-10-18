@@ -1,4 +1,4 @@
-package com.baulin.alexander.collectionsandmaps.ui;
+package com.baulin.alexander.collectionsandmaps.mvp.ui;
 
 
 import android.os.Bundle;
@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.baulin.alexander.collectionsandmaps.R;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 

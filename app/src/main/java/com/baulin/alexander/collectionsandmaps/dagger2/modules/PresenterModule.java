@@ -8,7 +8,7 @@ import com.baulin.alexander.collectionsandmaps.mvp.ui.MainActivity;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = UI_Module.class)
+@Module(includes = MainActivityModule.class)
 public class PresenterModule {
 
     @Provides

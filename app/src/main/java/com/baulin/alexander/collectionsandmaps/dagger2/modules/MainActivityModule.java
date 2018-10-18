@@ -9,7 +9,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class UI_Module {
+public class MainActivityModule {
 
     @Provides
     @ApplicationScope

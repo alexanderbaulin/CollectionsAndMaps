@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.baulin.alexander.collectionsandmaps.App;
+import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.presenter.Presenter;
 import com.baulin.alexander.collectionsandmaps.R;
 
@@ -59,7 +59,10 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
 
-       new App().onCreate();
+        Presenter presenter = App.get(this).getPresenter();
+        MainActivity mainActivity = App.get(this).getActivity();
+
+
         //AndroidInjection.inject(this);
     }
 

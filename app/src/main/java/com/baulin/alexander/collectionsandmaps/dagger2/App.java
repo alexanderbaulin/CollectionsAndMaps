@@ -14,6 +14,7 @@ public class App extends Application {
 
     private Presenter presenter;
     private MainActivity mainActivity;
+    AppComponent component;
 
     public static App get(Activity activity) {
         return (App)activity.getApplication();
@@ -23,14 +24,15 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        AppComponent component = DaggerAppComponent.builder()
+        component = DaggerAppComponent.builder()
                 .contextModule(new ContextModule(this))
                 .build();
 
-        presenter = component.getPresenter();
-        mainActivity = component.getMainActivity();
-        Log.d("dagger", component.getPresenter().toString());
-        Log.d("dagger", component.getPresenter().toString());
+
+        //presenter = component.getPresenter();
+
+        //Log.d("dagger", component.getPresenter().toString());
+        //Log.d("dagger", component.getPresenter().toString());
     }
 
     public Presenter getPresenter() {
@@ -39,5 +41,9 @@ public class App extends Application {
 
     public MainActivity getActivity() {
         return mainActivity;
+    }
+
+    public AppComponent getComponent() {
+        return component;
     }
 }

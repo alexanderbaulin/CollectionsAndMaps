@@ -11,9 +11,15 @@ import dagger.Provides;
 @Module
 public class MainActivityModule {
 
+    private MainActivity mainActivity;
+
+    public MainActivityModule(MainActivity activity) {
+        mainActivity = activity;
+    }
+
     @Provides
-    @ApplicationScope
+    @MainActivityScope
     MainActivity mainActivity() {
-        return new MainActivity();
+        return mainActivity;
     }
 }

@@ -18,8 +18,6 @@ import dagger.Component;
 @ApplicationScope
 @Component(modules = { PresenterModule.class, ModelModule.class, ContextModule.class})
 public interface AppComponent {
-    Presenter getPresenter();
-    MainActivity getMainActivity();
     CollectionsAndMapsTests getTests();
     Context getContext();
 }

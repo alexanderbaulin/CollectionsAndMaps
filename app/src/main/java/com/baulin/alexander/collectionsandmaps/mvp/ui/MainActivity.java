@@ -16,8 +16,13 @@ import android.widget.Toast;
 
 
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
+import com.baulin.alexander.collectionsandmaps.dagger2.components.DaggerMainActivityComponent;
+import com.baulin.alexander.collectionsandmaps.dagger2.components.MainActivityComponent;
+import com.baulin.alexander.collectionsandmaps.dagger2.modules.MainActivityModule;
 import com.baulin.alexander.collectionsandmaps.mvp.presenter.Presenter;
 import com.baulin.alexander.collectionsandmaps.R;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +55,11 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
         ButterKnife.bind(this);
 
+        MainActivityComponent component = DaggerMainActivityComponent.builder()
+                .mainActivityModule(new MainActivityModule(this))
+                .appComponent(App.get(this).getComponent())
+                .build();
+
         mapsFragment = new MapsFragment();
         collectionsFragment = new CollectionsFragment();
         pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -59,8 +69,9 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
 
-        Presenter presenter = App.get(this).getPresenter();
-        MainActivity mainActivity = App.get(this).getActivity();
+        component.getTests();
+        presenter = component.getPresenter();
+
 
 
         //AndroidInjection.inject(this);

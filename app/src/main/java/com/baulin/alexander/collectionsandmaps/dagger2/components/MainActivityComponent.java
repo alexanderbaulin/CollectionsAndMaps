@@ -2,6 +2,7 @@ package com.baulin.alexander.collectionsandmaps.dagger2.components;
 
 import com.baulin.alexander.collectionsandmaps.dagger2.modules.MainActivityModule;
 import com.baulin.alexander.collectionsandmaps.dagger2.scopes.MainActivityScope;
+import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
 import com.baulin.alexander.collectionsandmaps.mvp.ui.MainActivity;
 
 import dagger.Component;

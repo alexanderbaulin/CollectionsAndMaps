@@ -26,7 +26,7 @@ public class ContextModule {
 
     @Provides
     @ApplicationScope
-    public Context context() {
+    Context context() {
         return context;
     }
 }

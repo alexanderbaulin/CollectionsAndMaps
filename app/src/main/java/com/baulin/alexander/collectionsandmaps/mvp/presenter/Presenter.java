@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
+import com.baulin.alexander.collectionsandmaps.dagger2.components.AppComponent;
+import com.baulin.alexander.collectionsandmaps.dagger2.components.DaggerAppComponent;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
@@ -27,8 +29,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     private Semaphore semaphore;
 
     @Inject
-    public Presenter(MainActivity mainView) {
-        App.getComponent().injectPresenter(this);
+    public Presenter(View mainView) {
         view = mainView;
         int processorsNumber = Runtime.getRuntime().availableProcessors();
         semaphore = new Semaphore(processorsNumber, true);

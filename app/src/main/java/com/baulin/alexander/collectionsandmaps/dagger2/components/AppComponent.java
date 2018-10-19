@@ -5,16 +5,19 @@ import android.content.Context;
 
 
 import com.baulin.alexander.collectionsandmaps.dagger2.modules.ContextModule;
-import com.baulin.alexander.collectionsandmaps.dagger2.modules.ModelModule;
 import com.baulin.alexander.collectionsandmaps.dagger2.scopes.ApplicationScope;
+import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
+import com.baulin.alexander.collectionsandmaps.mvp.presenter.Presenter;
+
 
 import dagger.Component;
 
 
 @ApplicationScope
-@Component(modules = { ModelModule.class, ContextModule.class})
+@Component(modules = { ContextModule.class})
 public interface AppComponent {
-    CollectionsAndMapsTests getTests();
+    Model getTests();
     Context getContext();
+    void injectPresenter(Presenter presenter);
 }

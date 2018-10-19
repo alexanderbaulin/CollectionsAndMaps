@@ -12,7 +12,7 @@ import com.baulin.alexander.collectionsandmaps.mvp.ui.MainActivity;
 
 public class App extends Application {
 
-    AppComponent component;
+    static AppComponent component;
 
     public static App get(Activity activity) {
         return (App)activity.getApplication();
@@ -33,7 +33,7 @@ public class App extends Application {
         //Log.d("dagger", component.getPresenter().toString());
     }
 
-    public AppComponent getComponent() {
+    public static AppComponent getComponent() {
         return component;
     }
 }

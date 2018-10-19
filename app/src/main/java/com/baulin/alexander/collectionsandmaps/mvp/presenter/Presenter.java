@@ -22,13 +22,14 @@ import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
 
 public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.Presenter {
     private View view;
-    private Model model;
+    @Inject
+    Model model;
     private Semaphore semaphore;
 
     @Inject
     public Presenter(MainActivity mainView) {
+        App.getComponent().injectPresenter(this);
         view = mainView;
-        model = new CollectionsAndMapsTests();
         int processorsNumber = Runtime.getRuntime().availableProcessors();
         semaphore = new Semaphore(processorsNumber, true);
     }

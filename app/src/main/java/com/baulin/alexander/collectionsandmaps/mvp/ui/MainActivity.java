@@ -27,6 +27,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.AndroidInjection;
 
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
         MainActivityComponent component = DaggerMainActivityComponent.builder()
                 .mainActivityModule(new MainActivityModule(this))
-                .appComponent(App.get(this).getComponent())
+                .appComponent(App.getComponent())
                 .build();
 
         component.injectMainActivity(this);

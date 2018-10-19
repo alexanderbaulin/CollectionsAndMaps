@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     @BindView(R.id.btnSubmit) Button submit;
     @BindView(R.id.editNumber) EditText input;
 
-    Presenter presenter = new Presenter(this);
+    @Inject
+    Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
                 .appComponent(App.get(this).getComponent())
                 .build();
 
+        component.injectMainActivity(this);
+
         mapsFragment = new MapsFragment();
         collectionsFragment = new CollectionsFragment();
         pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -69,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
 
-        component.getTests();
-        presenter = component.getPresenter();
+        //component.getTests();
+        //presenter = component.getPresenter();
 
 
 

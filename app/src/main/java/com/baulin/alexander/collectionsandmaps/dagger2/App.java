@@ -12,8 +12,6 @@ import com.baulin.alexander.collectionsandmaps.mvp.ui.MainActivity;
 
 public class App extends Application {
 
-    private Presenter presenter;
-    private MainActivity mainActivity;
     AppComponent component;
 
     public static App get(Activity activity) {
@@ -33,14 +31,6 @@ public class App extends Application {
 
         //Log.d("dagger", component.getPresenter().toString());
         //Log.d("dagger", component.getPresenter().toString());
-    }
-
-    public Presenter getPresenter() {
-        return presenter;
-    }
-
-    public MainActivity getActivity() {
-        return mainActivity;
     }
 
     public AppComponent getComponent() {

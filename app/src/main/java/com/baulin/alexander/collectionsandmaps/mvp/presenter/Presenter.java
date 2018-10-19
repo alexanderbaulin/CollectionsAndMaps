@@ -4,14 +4,18 @@ package com.baulin.alexander.collectionsandmaps.mvp.presenter;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsTest;
 import com.baulin.alexander.collectionsandmaps.mvp.model.MapsTest;
 import com.baulin.alexander.collectionsandmaps.R;
+import com.baulin.alexander.collectionsandmaps.mvp.ui.MainActivity;
 
 import java.util.concurrent.Semaphore;
+
+import javax.inject.Inject;
 
 import static android.view.View.*;
 import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
@@ -21,7 +25,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     private Model model;
     private Semaphore semaphore;
 
-    public Presenter(View mainView) {
+    @Inject
+    public Presenter(MainActivity mainView) {
         view = mainView;
         model = new CollectionsAndMapsTests();
         int processorsNumber = Runtime.getRuntime().availableProcessors();

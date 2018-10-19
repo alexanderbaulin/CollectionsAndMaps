@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
-        // ContextModule of the app under test.
+        // AppModule of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.baulin.alexander.collectionsandmaps", appContext.getPackageName());

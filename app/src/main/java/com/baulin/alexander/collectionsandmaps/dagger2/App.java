@@ -2,12 +2,9 @@ package com.baulin.alexander.collectionsandmaps.dagger2;
 
 import android.app.Activity;
 import android.app.Application;
-import android.util.Log;
 
 import com.baulin.alexander.collectionsandmaps.dagger2.components.*;
-import com.baulin.alexander.collectionsandmaps.dagger2.modules.ContextModule;
-import com.baulin.alexander.collectionsandmaps.mvp.presenter.Presenter;
-import com.baulin.alexander.collectionsandmaps.mvp.ui.MainActivity;
+import com.baulin.alexander.collectionsandmaps.dagger2.modules.AppModule;
 
 
 public class App extends Application {
@@ -23,7 +20,7 @@ public class App extends Application {
         super.onCreate();
 
         component = DaggerAppComponent.builder()
-                .contextModule(new ContextModule(this))
+                .appModule(new AppModule(this))
                 .build();
 
 

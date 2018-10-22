@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,6 +72,8 @@ public class MapsFragment extends Fragment {
         progressBars.put(pbTreeMapSearch.getId(), pbTreeMapSearch);
         progressBars.put(pbTreeMapRemove.getId(), pbTreeMapRemove);
 
+        Log.d("rotate_crush", "Фрагмент в onCreateView " + this.toString());
+
         return view;
     }
 
@@ -83,6 +86,7 @@ public class MapsFragment extends Fragment {
     public ProgressBar getProgressBar(int id) {
         return progressBars.get(id);
     }
+
 
     public TextView getTextView(int id) {
         return textViews.get(id);

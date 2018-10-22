@@ -1,9 +1,12 @@
 package com.baulin.alexander.collectionsandmaps.mvp.ui;
 
 
+
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
 
+        Log.d("rotate_crush", "Фрагмент при создании Activity " + mapsFragment.toString());
+
         //component.getTests();
         //presenter = component.getPresenter();
 
@@ -93,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d("myLogs", "restore");
+        Log.d("restore", "restore");
+        setPostSubmitClickedUI();
+        setPostLoadingUI();
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -146,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     }
 
     private ProgressBar getProgressBar(int id) {
+        Log.d("rotate_crush", "Обращение к фрагменту из Activity за ProgressBar" + mapsFragment.toString());
         ProgressBar view = mapsFragment.getProgressBar(id);
         if(view != null)
             return view;

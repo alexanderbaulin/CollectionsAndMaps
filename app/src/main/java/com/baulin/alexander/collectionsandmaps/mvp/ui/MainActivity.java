@@ -79,8 +79,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
             fixScreenOrientation(true);
             Log.d("test", "saveInstanceState = null");
         }
-        //component.getTests();
-        //presenter = component.getPresenter();
+
         //AndroidInjection.inject(this);
     }
 
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     @Override
     public boolean isTabCollectionSelected() {
         Log.d("test", "item = " + viewPager.getCurrentItem()) ;
-        // viewPager.getAdapter().
         TabLayout.Tab tabCollection = tabLayout.getTabAt(0);
         return tabCollection != null && tabCollection.isSelected();
     }

@@ -78,6 +78,24 @@ public class MapsFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        for(Integer key: textViews.keySet()) {
+            saveTextFieldState(outState, textViews.get(key));
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        if(savedInstanceState != null) {
+            for(Integer key: textViews.keySet()) {
+                restoreTextFieldState(savedInstanceState, textViews.get(key));
+            }
+        }
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
@@ -90,5 +108,13 @@ public class MapsFragment extends Fragment {
 
     public TextView getTextView(int id) {
         return textViews.get(id);
+    }
+
+    private void saveTextFieldState(Bundle outState, TextView view) {
+        outState.putString(String.valueOf(view.getId()), view.getText().toString());
+    }
+
+    private void restoreTextFieldState(Bundle savedInstanceState, TextView view) {
+        view.setText(savedInstanceState.getString(String.valueOf(view.getId())));
     }
 }

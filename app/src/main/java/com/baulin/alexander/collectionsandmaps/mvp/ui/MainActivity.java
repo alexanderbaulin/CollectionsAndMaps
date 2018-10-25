@@ -69,9 +69,8 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
         mapsFragment = new MapsFragment();
         collectionsFragment = new CollectionsFragment();
-        pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        pageAdapter.addFragment(collectionsFragment, "Collections");
-        pageAdapter.addFragment(mapsFragment, "Maps");
+        pageAdapter = new SectionsPageAdapter(getSupportFragmentManager(), this);
+
         viewPager.setAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
@@ -111,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
     @Override
     public boolean isTabCollectionSelected() {
+        Log.d("test", "item = " + viewPager.getCurrentItem()) ;
+        // viewPager.getAdapter().
         TabLayout.Tab tabCollection = tabLayout.getTabAt(0);
         return tabCollection != null && tabCollection.isSelected();
     }

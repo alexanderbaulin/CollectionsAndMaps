@@ -2,6 +2,8 @@ package com.baulin.alexander.collectionsandmaps.mvp.ui;
 
 
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.FloatingActionButton;
@@ -66,22 +68,19 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
                 .build();
 
         component.injectMainActivity(this);
-
-        mapsFragment = new MapsFragment();
-        collectionsFragment = new CollectionsFragment();
         pageAdapter = new SectionsPageAdapter(getSupportFragmentManager(), this);
-
         viewPager.setAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
 
-        Log.d("rotate_crush", "Фрагмент при создании Activity " + mapsFragment.toString());
+        if(mapsFragment != null) Log.d("rotate_crush", "Фрагмент при создании Activity " + mapsFragment.toString());
 
+        if(savedInstanceState == null) {
+            fixScreenOrientation(true);
+            Log.d("test", "saveInstanceState = null");
+        }
         //component.getTests();
         //presenter = component.getPresenter();
-
-
-
         //AndroidInjection.inject(this);
     }
 
@@ -141,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         progressBar.setVisibility(GONE);
         viewPager.setVisibility(VISIBLE);
         floatingActionButton.setVisibility(VISIBLE);
+        fixScreenOrientation(false);
     }
 
     @Override
@@ -151,6 +151,14 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     @Override
     public void setTestResult(int txtID, String result) {
         getTextView(txtID).setText(result);
+    }
+
+    private void fixScreenOrientation(boolean fixScreen) {
+        if(fixScreen) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
     }
 
     private ProgressBar getProgressBar(int id) {

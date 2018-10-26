@@ -54,23 +54,23 @@ public class MapsFragment extends Fragment {
 
         textViews = new TreeMap<>();
 
-        textViews.put(hashMapAdd.getId(), hashMapAdd);
-        textViews.put(hashMapSearch.getId(), hashMapSearch);
-        textViews.put(hashMapRemove.getId(), hashMapRemove);
+        putTextView(hashMapAdd);
+        putTextView(hashMapSearch);
+        putTextView(hashMapRemove);
 
-        textViews.put(treeMapAdd.getId(), treeMapAdd);
-        textViews.put(treeMapSearch.getId(), treeMapSearch);
-        textViews.put(treeMapRemove.getId(), treeMapRemove);
+        putTextView(treeMapAdd);
+        putTextView(treeMapSearch);
+        putTextView(treeMapRemove);
 
         progressBars = new TreeMap<>();
 
-        progressBars.put(pbHashMapAdd.getId(), pbHashMapAdd);
-        progressBars.put(pbHashMapSearch.getId(), pbHashMapSearch);
-        progressBars.put(pbHashMapRemove.getId(), pbHashMapRemove);
+        putProgressBar(pbHashMapAdd);
+        putProgressBar(pbHashMapSearch);
+        putProgressBar(pbHashMapRemove);
 
-        progressBars.put(pbTreeMapAdd.getId(), pbTreeMapAdd);
-        progressBars.put(pbTreeMapSearch.getId(), pbTreeMapSearch);
-        progressBars.put(pbTreeMapRemove.getId(), pbTreeMapRemove);
+        putProgressBar(pbTreeMapAdd);
+        putProgressBar(pbTreeMapSearch);
+        putProgressBar(pbTreeMapRemove);
 
         Log.d("rotate_crush", "Фрагмент в onCreateView " + this.toString());
 
@@ -108,6 +108,14 @@ public class MapsFragment extends Fragment {
 
     public TextView getTextView(int id) {
         return textViews.get(id);
+    }
+
+    private void putProgressBar(ProgressBar view) {
+        progressBars.put(view.getId(), view);
+    }
+
+    private void putTextView(TextView view) {
+        textViews.put(view.getId(), view);
     }
 
     private void saveTextFieldState(Bundle outState, TextView view) {

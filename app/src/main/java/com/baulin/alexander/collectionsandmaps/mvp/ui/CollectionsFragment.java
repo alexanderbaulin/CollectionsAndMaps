@@ -86,55 +86,55 @@ public class CollectionsFragment extends Fragment {
 
         textViews = new TreeMap<>();
 
-        textViews.put(arrayAddBegin.getId(), arrayAddBegin);
-        textViews.put(arrayAddMiddle.getId(), arrayAddMiddle);
-        textViews.put(arrayAddEnd.getId(), arrayAddEnd);
-        textViews.put(arraySearchValue.getId(), arraySearchValue);
-        textViews.put(arrayRemoveBegin.getId(), arrayRemoveBegin);
-        textViews.put(arrayRemoveMiddle.getId(), arrayRemoveMiddle);
-        textViews.put(arrayRemoveEnd.getId(),  arrayRemoveEnd);
+        putTextView(arrayAddBegin);
+        putTextView(arrayAddMiddle);
+        putTextView(arrayAddEnd);
+        putTextView(arraySearchValue);
+        putTextView(arrayRemoveBegin);
+        putTextView(arrayRemoveMiddle);
+        putTextView(arrayRemoveEnd);
 
-        textViews.put(linkedAddBegin.getId(), linkedAddBegin);
-        textViews.put(linkedAddMiddle.getId(), linkedAddMiddle);
-        textViews.put(linkedAddEnd.getId(), linkedAddEnd);
-        textViews.put(linkedSearchValue.getId(), linkedSearchValue);
-        textViews.put(linkedRemoveBegin.getId(), linkedRemoveBegin);
-        textViews.put(linkedRemoveMiddle.getId(), linkedRemoveMiddle);
-        textViews.put(linkedRemoveEnd.getId(), linkedRemoveEnd);
+        putTextView(linkedAddBegin);
+        putTextView(linkedAddMiddle);
+        putTextView(linkedAddEnd);
+        putTextView(linkedSearchValue);
+        putTextView(linkedRemoveBegin);
+        putTextView(linkedRemoveMiddle);
+        putTextView(linkedRemoveEnd);
 
-        textViews.put(copyOnWriteAddBegin.getId(), copyOnWriteAddBegin);
-        textViews.put(copyOnWriteAddMiddle.getId(), copyOnWriteAddMiddle);
-        textViews.put(copyOnWriteAddEnd.getId(), copyOnWriteAddEnd);
-        textViews.put(copyOnWriteSearchValue.getId(), copyOnWriteSearchValue);
-        textViews.put(copyOnWriteRemoveBegin.getId(), copyOnWriteRemoveBegin);
-        textViews.put(copyOnWriteRemoveMiddle.getId(), copyOnWriteRemoveMiddle);
-        textViews.put(copyOnWriteRemoveEnd.getId(), copyOnWriteRemoveEnd);
+        putTextView(copyOnWriteAddBegin);
+        putTextView(copyOnWriteAddMiddle);
+        putTextView(copyOnWriteAddEnd);
+        putTextView(copyOnWriteSearchValue);
+        putTextView(copyOnWriteRemoveBegin);
+        putTextView(copyOnWriteRemoveMiddle);
+        putTextView(copyOnWriteRemoveEnd);
 
         progressBars = new TreeMap<>();
 
-        progressBars.put(pbArrayAddBegin.getId(),  pbArrayAddBegin);
-        progressBars.put(pbArrayAddMiddle.getId(), pbArrayAddMiddle);
-        progressBars.put(pbArrayAddEnd.getId(), pbArrayAddEnd);
-        progressBars.put(pbArraySearchValue.getId(), pbArraySearchValue);
-        progressBars.put(pbArrayRemoveBegin.getId(),  pbArrayRemoveBegin);
-        progressBars.put(pbArrayRemoveMiddle.getId(), pbArrayRemoveMiddle);
-        progressBars.put(pbArrayRemoveEnd.getId(), pbArrayRemoveEnd);
+        putProgressBar(pbArrayAddBegin);
+        putProgressBar(pbArrayAddMiddle);
+        putProgressBar(pbArrayAddEnd);
+        putProgressBar(pbArraySearchValue);
+        putProgressBar(pbArrayRemoveBegin);
+        putProgressBar(pbArrayRemoveMiddle);
+        putProgressBar(pbArrayRemoveEnd);
 
-        progressBars.put(pbLinkedAddBegin.getId(), pbLinkedAddBegin);
-        progressBars.put(pbLinkedAddMiddle.getId(), pbLinkedAddMiddle);
-        progressBars.put(pbLinkedAddEnd.getId(), pbLinkedAddEnd);
-        progressBars.put(pbLinkedSearchValue.getId(), pbLinkedSearchValue);
-        progressBars.put(pbLinkedRemoveBegin.getId(), pbLinkedRemoveBegin);
-        progressBars.put(pbLinkedRemoveMiddle.getId(), pbLinkedRemoveMiddle);
-        progressBars.put(pbLinkedRemoveEnd.getId(), pbLinkedRemoveEnd);
+        putProgressBar(pbLinkedAddBegin);
+        putProgressBar(pbLinkedAddMiddle);
+        putProgressBar(pbLinkedAddEnd);
+        putProgressBar(pbLinkedSearchValue);
+        putProgressBar(pbLinkedRemoveBegin);
+        putProgressBar(pbLinkedRemoveMiddle);
+        putProgressBar(pbLinkedRemoveEnd);
 
-        progressBars.put(pbCopyOnWriteAddBegin.getId(), pbCopyOnWriteAddBegin);
-        progressBars.put(pbCopyOnWriteAddMiddle.getId(), pbCopyOnWriteAddMiddle);
-        progressBars.put(pbCopyOnWriteAddEnd.getId(), pbCopyOnWriteAddEnd);
-        progressBars.put(pbCopyOnWriteSearchValue.getId(), pbCopyOnWriteSearchValue);
-        progressBars.put(pbCopyOnWriteRemoveBegin.getId(), pbCopyOnWriteRemoveBegin);
-        progressBars.put(pbCopyOnWriteRemoveMiddle.getId(), pbCopyOnWriteRemoveMiddle);
-        progressBars.put(pbCopyOnWriteRemoveEnd.getId(), pbCopyOnWriteRemoveEnd);
+        putProgressBar(pbCopyOnWriteAddBegin);
+        putProgressBar(pbCopyOnWriteAddMiddle);
+        putProgressBar(pbCopyOnWriteAddEnd);
+        putProgressBar(pbCopyOnWriteSearchValue);
+        putProgressBar(pbCopyOnWriteRemoveBegin);
+        putProgressBar(pbCopyOnWriteRemoveMiddle);
+        putProgressBar(pbCopyOnWriteRemoveEnd);
 
         return view;
     }
@@ -179,4 +179,13 @@ public class CollectionsFragment extends Fragment {
     private void restoreTextFieldState(Bundle savedInstanceState, TextView view) {
         view.setText(savedInstanceState.getString(String.valueOf(view.getId())));
     }
+
+    private void putProgressBar(ProgressBar view) {
+        progressBars.put(view.getId(), view);
+    }
+
+    private void putTextView(TextView view) {
+        textViews.put(view.getId(), view);
+    }
+
 }

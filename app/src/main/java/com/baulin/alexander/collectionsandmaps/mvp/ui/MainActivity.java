@@ -36,8 +36,6 @@ import static android.view.View.VISIBLE;
 
 
 public class MainActivity extends AppCompatActivity implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.View {
-    CollectionsFragment collectionsFragment;
-    MapsFragment mapsFragment;
     SectionsPageAdapter pageAdapter;
 
     @BindView(R.id.progressBar) ProgressBar progressBar;
@@ -65,18 +63,15 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
         component.injectMainActivity(this);
         presenter.setView(this);
-        pageAdapter = new SectionsPageAdapter(getSupportFragmentManager(), this);
+        pageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pageAdapter);
         tabLayout.setupWithViewPager(viewPager);
         setPreSubmitClickedUI();
-
-        if(mapsFragment != null) Log.d("rotate_crush", "Фрагмент при создании Activity " + mapsFragment.toString());
 
         if(savedInstanceState == null) {
             fixScreenOrientation(true);
             Log.d("test", "saveInstanceState = null");
         }
-        //AndroidInjection.inject(this);
     }
 
     @OnClick(R.id.btnSubmit)
@@ -139,12 +134,12 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
     @Override
     public void setProgressIndicator(int pbID, int visibility) {
-        getProgressBar(pbID).setVisibility(visibility);
+        pageAdapter.getProgressBar(pbID).setVisibility(visibility);
     }
 
     @Override
     public void setTestResult(int txtID, String result) {
-        getTextView(txtID).setText(result);
+        pageAdapter.getTextView(txtID).setText(result);
     }
 
     private void fixScreenOrientation(boolean fixScreen) {
@@ -153,23 +148,5 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
-    }
-
-    private ProgressBar getProgressBar(int id) {
-        Log.d("rotate_crush", "Обращение к фрагменту из Activity за ProgressBar" + mapsFragment.toString());
-        ProgressBar view = mapsFragment.getProgressBar(id);
-        if(view != null)
-            return view;
-        else
-            return collectionsFragment.getProgressBar(id);
-
-    }
-
-    private TextView getTextView(int id) {
-        TextView view = mapsFragment.getTextView(id);
-        if(view != null)
-            return view;
-        else
-            return collectionsFragment.getTextView(id);
     }
 }

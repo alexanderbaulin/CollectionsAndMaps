@@ -6,15 +6,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
 import android.view.ViewGroup;
-
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 class SectionsPageAdapter extends FragmentPagerAdapter {
-    private MainActivity ma;
+    private CollectionsFragment collections;
+    private MapsFragment maps;
 
-    SectionsPageAdapter(FragmentManager fm, MainActivity activity) {
+    SectionsPageAdapter(FragmentManager fm) {
         super(fm);
-        ma = activity;
     }
 
     @Override
@@ -50,10 +51,10 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
         Log.d("test", "instantiateItem " + position);
         switch (position) {
             case 0:
-                ma.collectionsFragment = (CollectionsFragment) createdFragment;
+                collections = (CollectionsFragment) createdFragment;
                 break;
             case 1:
-                ma.mapsFragment = (MapsFragment) createdFragment;
+                maps = (MapsFragment) createdFragment;
                 break;
         }
         return createdFragment;
@@ -62,5 +63,21 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return 2;
+    }
+
+    ProgressBar getProgressBar(int id) {
+        ProgressBar view = maps.getProgressBar(id);
+        if(view != null)
+            return view;
+        else
+            return collections.getProgressBar(id);
+    }
+
+    TextView getTextView(int id) {
+        TextView view = maps.getTextView(id);
+        if(view != null)
+            return view;
+        else
+            return collections.getTextView(id);
     }
 }

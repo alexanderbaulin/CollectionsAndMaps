@@ -32,7 +32,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
         semaphore = new Semaphore(processorsNumber, true);
         //Log.d("test", "testClass = null " + (testClass == null));
     }
-
+     
+    @Override
     public void setView(View v) {
         view = new WeakReference<>(v);
     }

@@ -26,6 +26,7 @@ public class MainActivityModule {
     }
 
     @Provides
+    @MainActivityScope
     Presenter getPresenter() {
         return new Presenter();
     }

@@ -24,4 +24,9 @@ public class MainActivityModule {
     View mainActivity() {
         return mainActivity;
     }
+
+    @Provides
+    Presenter getPresenter() {
+        return new Presenter();
+    }
 }

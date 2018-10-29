@@ -3,7 +3,6 @@ package com.baulin.alexander.collectionsandmaps.dagger2.modules;
 
 import android.content.Context;
 
-import com.baulin.alexander.collectionsandmaps.TestClass;
 import com.baulin.alexander.collectionsandmaps.dagger2.scopes.ApplicationScope;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
@@ -31,10 +30,4 @@ public class AppModule {
         return context;
     }
 
-    //тестовый метод
-    @Provides
-    @ApplicationScope
-    TestClass testClass() {
-        return new TestClass();
-    }
 }

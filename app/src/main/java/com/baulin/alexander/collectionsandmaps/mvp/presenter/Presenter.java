@@ -4,18 +4,14 @@ package com.baulin.alexander.collectionsandmaps.mvp.presenter;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.baulin.alexander.collectionsandmaps.TestClass;
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
-import com.baulin.alexander.collectionsandmaps.dagger2.components.AppComponent;
-import com.baulin.alexander.collectionsandmaps.dagger2.components.DaggerAppComponent;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
-import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsTest;
 import com.baulin.alexander.collectionsandmaps.mvp.model.MapsTest;
 import com.baulin.alexander.collectionsandmaps.R;
-import com.baulin.alexander.collectionsandmaps.mvp.ui.MainActivity;
 
+import java.lang.ref.WeakReference;
 import java.util.concurrent.Semaphore;
 
 import javax.inject.Inject;
@@ -24,35 +20,39 @@ import static android.view.View.*;
 import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
 
 public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.Presenter {
-    private View view;
+    private WeakReference<View> view;
+
     @Inject
     Model model;
     private Semaphore semaphore;
 
-    @Inject
-    public Presenter(View mainView) {
-        view = mainView;
+    public Presenter() {
         App.getComponent().injectPresenter(this);
         int processorsNumber = Runtime.getRuntime().availableProcessors();
         semaphore = new Semaphore(processorsNumber, true);
+        //Log.d("test", "testClass = null " + (testClass == null));
+    }
+
+    public void setView(View v) {
+        view = new WeakReference<>(v);
     }
 
     @Override
     public void onSubmitButtonClicked() {
-        String number = view.getInputNumber();
+        String number = view.get().getInputNumber();
         if(number.equals("")) {
-            view.showToast("Enter number");
+            view.get().showToast("Enter number");
             return;
         }
         model.setNumberOfElements(Integer.valueOf(number));
         Log.d("myLogs5", "button " + Integer.valueOf(number));
-        view.setPostSubmitClickedUI();
+        view.get().setPostSubmitClickedUI();
         fillCollectionsAndMaps();
     }
 
     @Override
     public void onFloatingCalculationButtonClicked() {
-        if(view.isTabCollectionSelected()) {
+        if(view.get().isTabCollectionSelected()) {
             testCollections();
         } else {
             testMaps();
@@ -140,7 +140,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
         @Override
         protected void onPostExecute(Boolean result) {
             if(result) {
-                view.setPostLoadingUI();
+                view.get().setPostLoadingUI();
             }
         }
     }
@@ -158,7 +158,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
 
         @Override
         protected void onPreExecute() {
-            view.setProgressIndicator(pbID, VISIBLE);
+            view.get().setProgressIndicator(pbID, VISIBLE);
             super.onPreExecute();
         }
 
@@ -264,8 +264,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            view.setTestResult(txtID, String.valueOf(timeTaskExecution));
-            view.setProgressIndicator(pbID, INVISIBLE);
+            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
+            view.get().setProgressIndicator(pbID, INVISIBLE);
             Log.d("myLogs", "" + timeTaskExecution);
         }
     }

@@ -3,9 +3,10 @@ package com.baulin.alexander.collectionsandmaps.dagger2.modules;
 
 import android.content.Context;
 
-import com.baulin.alexander.collectionsandmaps.dagger2.scopes.ApplicationScope;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,13 +20,13 @@ public class AppModule {
     }
 
     @Provides
-    @ApplicationScope
+    @Singleton
     Model tests() {
         return new CollectionsAndMapsTests();
     }
 
     @Provides
-    @ApplicationScope
+    @Singleton
     Context context() {
         return context;
     }

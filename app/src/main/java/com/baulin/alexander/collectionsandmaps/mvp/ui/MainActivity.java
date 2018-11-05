@@ -142,6 +142,16 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         pageAdapter.getTextView(txtID).setText(result);
     }
 
+    @Override
+    public void setCollectionTestsExecutingUI() {
+        pageAdapter.setCollectionProgressBarsVisible();
+    }
+
+    @Override
+    public void setMapsTestsExecutingUI() {
+        pageAdapter.setMapsProgressBarsVisible();
+    }
+
     private void fixScreenOrientation(boolean fixScreen) {
         if(fixScreen) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);

@@ -80,4 +80,12 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
         else
             return collections.getTextView(id);
     }
+
+    void setCollectionProgressBarsVisible() {
+        collections.setProgressBarsVisible();
+    }
+
+    void setMapsProgressBarsVisible() {
+        maps.setProgressBarsVisible();
+    }
 }

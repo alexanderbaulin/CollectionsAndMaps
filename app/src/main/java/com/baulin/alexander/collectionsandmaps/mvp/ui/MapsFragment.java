@@ -125,4 +125,10 @@ public class MapsFragment extends Fragment {
     private void restoreTextFieldState(Bundle savedInstanceState, TextView view) {
         view.setText(savedInstanceState.getString(String.valueOf(view.getId())));
     }
+
+    public void setProgressBarsVisible() {
+        for(Integer key: progressBars.keySet()) {
+            progressBars.get(key).setVisibility(View.VISIBLE);
+        }
+    }
 }

@@ -10,4 +10,6 @@ public interface View {
     void setPostLoadingUI();
     void setProgressIndicator(int pbID, int visible);
     void setTestResult(int txtID, String result);
+    void setCollectionTestsExecutingUI();
+    void setMapsTestsExecutingUI();
 }

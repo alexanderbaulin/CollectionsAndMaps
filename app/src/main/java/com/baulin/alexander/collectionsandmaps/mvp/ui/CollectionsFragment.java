@@ -188,4 +188,9 @@ public class CollectionsFragment extends Fragment {
         textViews.put(view.getId(), view);
     }
 
+    public void setProgressBarsVisible() {
+        for(Integer key: progressBars.keySet()) {
+             progressBars.get(key).setVisibility(View.VISIBLE);
+        }
+    }
 }

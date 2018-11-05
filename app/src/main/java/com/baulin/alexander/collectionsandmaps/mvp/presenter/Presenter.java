@@ -6,6 +6,7 @@ import android.util.Log;
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
+import com.baulin.alexander.collectionsandmaps.mvp.model.TestTask;
 
 import java.lang.ref.WeakReference;
 
@@ -73,21 +74,21 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                 );
     }
 
-    private void runTests(Observable<String> tests) {
-         tests.doOnNext(String -> {
-                    model.execute(String);
-                    Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
+    private void runTests(Observable<TestTask> test) {
+        test.doOnNext(TestTask -> {
+                    model.execute(TestTask.getName());
+                    Log.d("rxJava", "Emitting item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
                 }
         )
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(String -> {
-                            int txtID = model.getTextView(String);
-                            int pbID = model.getProgressBar(String);
-                            long timeTaskExecution = model.getExecuteTimeOperation(String);
+                .subscribe(TestTask -> {
+                            int txtID = TestTask.getTxtID();
+                            int pbID = TestTask.getPbID();
+                            long timeTaskExecution = model.execute(TestTask.getName());
                             view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
                             view.get().setProgressIndicator(pbID, INVISIBLE);
-                            Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
+                            Log.d("rxJava", "Consuming item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
                         }
                 );
     }

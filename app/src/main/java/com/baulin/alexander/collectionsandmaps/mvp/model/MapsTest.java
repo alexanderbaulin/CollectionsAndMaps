@@ -14,11 +14,6 @@ class MapsTest {
     private static Integer testValue = 1;
 
     static void fillWithElements(Map<Integer, Integer> map) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         for(int i = 0; i < CollectionsAndMapsTests.number; i++) {
             map.put(i, i);
         }

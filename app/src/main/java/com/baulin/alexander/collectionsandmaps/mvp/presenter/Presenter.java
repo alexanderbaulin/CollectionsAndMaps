@@ -9,6 +9,7 @@ import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
 import com.baulin.alexander.collectionsandmaps.mvp.model.TestTask;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -74,22 +75,24 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                 );
     }
 
-    private void runTests(Observable<TestTask> test) {
-        test.doOnNext(TestTask -> {
-                    long timeTaskExecution = model.execute(TestTask.getName());
-                    TestTask.setTime(timeTaskExecution);
-                    Log.d("rxJava", "Emitting item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
-                }
-        )
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(TestTask -> {
-                            int txtID = TestTask.getTxtID();
-                            int pbID = TestTask.getPbID();
-                            view.get().setTestResult(txtID, String.valueOf(TestTask.getTime()));
-                            view.get().setProgressIndicator(pbID, INVISIBLE);
-                            Log.d("rxJava", "Consuming item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
-                        }
-                );
+    private void runTests(ArrayList<Observable<TestTask>> tests) {
+        for(Observable<TestTask> test: tests) {
+            test.doOnNext(TestTask -> {
+                        long timeTaskExecution = model.execute(TestTask.getName());
+                        TestTask.setTime(timeTaskExecution);
+                        Log.d("rxJava", "Emitting item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
+                    }
+            )
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(TestTask -> {
+                                int txtID = TestTask.getTxtID();
+                                int pbID = TestTask.getPbID();
+                                view.get().setTestResult(txtID, String.valueOf(TestTask.getTime()));
+                                view.get().setProgressIndicator(pbID, INVISIBLE);
+                                Log.d("rxJava", "Consuming item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
+                            }
+                    );
+        }
     }
 }

@@ -5,6 +5,8 @@ import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 
 
+import java.util.ArrayList;
+
 import io.reactivex.Observable;
 
 import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
@@ -172,13 +174,21 @@ public class CollectionsAndMapsTests implements Model {
     }
 
     @Override
-    public Observable<TestTask> getCollectionsTests() {
-        return Observable.fromArray(collectionsAsyncTasks);
+    public ArrayList<Observable<TestTask>> getCollectionsTests() {
+        ArrayList<Observable<TestTask>> result = new ArrayList<>();
+        for(TestTask task: collectionsAsyncTasks) {
+            result.add(Observable.just(task));
+        }
+        return result;
     }
 
     @Override
-    public Observable<TestTask> getMapsTests() {
-        return Observable.fromArray(mapsAsyncTasks);
+    public ArrayList<Observable<TestTask>> getMapsTests() {
+        ArrayList<Observable<TestTask>> result = new ArrayList<>();
+        for(TestTask task: mapsAsyncTasks) {
+            result.add(Observable.just(task));
+        }
+        return result;
     }
 
 }

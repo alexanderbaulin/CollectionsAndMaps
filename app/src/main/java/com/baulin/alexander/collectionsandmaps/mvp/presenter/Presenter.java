@@ -76,7 +76,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
 
     private void runTests(Observable<TestTask> test) {
         test.doOnNext(TestTask -> {
-                    model.execute(TestTask.getName());
+                    long timeTaskExecution = model.execute(TestTask.getName());
+                    TestTask.setTime(timeTaskExecution);
                     Log.d("rxJava", "Emitting item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
                 }
         )
@@ -85,8 +86,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                 .subscribe(TestTask -> {
                             int txtID = TestTask.getTxtID();
                             int pbID = TestTask.getPbID();
-                            long timeTaskExecution = model.execute(TestTask.getName());
-                            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
+                            view.get().setTestResult(txtID, String.valueOf(TestTask.getTime()));
                             view.get().setProgressIndicator(pbID, INVISIBLE);
                             Log.d("rxJava", "Consuming item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
                         }

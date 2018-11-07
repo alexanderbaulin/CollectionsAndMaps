@@ -1,11 +1,13 @@
 package com.baulin.alexander.collectionsandmaps.mvp.model;
 
+import android.util.Log;
+
 import com.baulin.alexander.collectionsandmaps.R;
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 
 
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 import io.reactivex.Observable;
 
@@ -13,15 +15,16 @@ import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
 
 public class CollectionsAndMapsTests implements Model {
     static int number;
+    private TreeMap<String, Long> testResults = new TreeMap<>();
 
-    private TestTask[] mapsAsyncTasks = {
-            new TestTask(R.id.txtHashMapAdd, R.id.pbHashMapAdd, HASH_MAP_ADD),
-            new TestTask(R.id.txtHashMapSearch, R.id.pbHashMapSearch, HASH_MAP_SEARCH),
-            new TestTask(R.id.txtHashMapRemove, R.id.pbHashMapRemove, HASH_MAP_REMOVE),
+    private String[] mapsAsyncTasks = {
+            HASH_MAP_ADD,
+            HASH_MAP_SEARCH,
+            HASH_MAP_REMOVE,
 
-            new TestTask(R.id.txtTreeMapAdd, R.id.pbTreeMapAdd, TREE_MAP_ADD),
-            new TestTask(R.id.txtTreeMapSearch, R.id.pbTreeMapSearch, TREE_MAP_SEARCH),
-            new TestTask(R.id.txtTreeMapRemove, R.id.pbTreeMapRemove, TREE_MAP_REMOVE)
+            TREE_MAP_ADD,
+            TREE_MAP_SEARCH,
+            TREE_MAP_REMOVE
     };
 
     private TestTask[] collectionsAsyncTasks = {
@@ -61,7 +64,8 @@ public class CollectionsAndMapsTests implements Model {
         number = numberOfElement;
     }
 
-    public long execute(String task) {
+    public String execute(String task) {
+        Log.d("rxJava", "Emitting item " + task + " on: " + Thread.currentThread().getName());
         long time = 0;
         switch (task) {
             case ARRAY_LIST:
@@ -166,7 +170,8 @@ public class CollectionsAndMapsTests implements Model {
 
 
         }
-        return time;
+        testResults.put(task, time);
+        return task;
     }
 
     public Observable<String> getFillTasks() {
@@ -174,21 +179,18 @@ public class CollectionsAndMapsTests implements Model {
     }
 
     @Override
-    public ArrayList<Observable<TestTask>> getCollectionsTests() {
-        ArrayList<Observable<TestTask>> result = new ArrayList<>();
-        for(TestTask task: collectionsAsyncTasks) {
-            result.add(Observable.just(task));
-        }
-        return result;
+    public Observable<TestTask> getCollectionsTests() {
+        return Observable.fromArray(collectionsAsyncTasks);
     }
 
     @Override
-    public ArrayList<Observable<TestTask>> getMapsTests() {
-        ArrayList<Observable<TestTask>> result = new ArrayList<>();
-        for(TestTask task: mapsAsyncTasks) {
-            result.add(Observable.just(task));
-        }
-        return result;
+    public long getTestTime(String name) {
+        return testResults.get(name);
+    }
+
+    @Override
+    public Observable<String> getMapsTests() {
+        return Observable.fromArray(mapsAsyncTasks);
     }
 
 }

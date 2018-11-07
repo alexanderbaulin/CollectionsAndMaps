@@ -3,6 +3,7 @@ package com.baulin.alexander.collectionsandmaps.mvp.presenter;
 
 import android.util.Log;
 
+import com.baulin.alexander.collectionsandmaps.R;
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
@@ -10,6 +11,7 @@ import com.baulin.alexander.collectionsandmaps.mvp.model.TestTask;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 import javax.inject.Inject;
 
@@ -18,16 +20,39 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.*;
+import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
+
 
 
 public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.Presenter {
     private WeakReference<View> view;
+    private TreeMap<String, Integer> textViews = new TreeMap<>();
+    private TreeMap<String, Integer> pbBars = new TreeMap<>();
 
     @Inject
     Model model;
 
     public Presenter() {
         App.getComponent().injectPresenter(this);
+
+        textViews.put(HASH_MAP_ADD, R.id.txtHashMapAdd);
+        pbBars.put(HASH_MAP_ADD, R.id.pbHashMapAdd);
+
+        textViews.put(HASH_MAP_SEARCH, R.id.txtHashMapSearch);
+        pbBars.put(HASH_MAP_SEARCH, R.id.pbHashMapSearch);
+
+        textViews.put(HASH_MAP_REMOVE, R.id.txtHashMapRemove);
+        pbBars.put(HASH_MAP_REMOVE, R.id.pbHashMapRemove);
+
+        textViews.put(TREE_MAP_ADD, R.id.txtTreeMapAdd);
+        pbBars.put(TREE_MAP_ADD, R.id.pbTreeMapAdd);
+
+        textViews.put(TREE_MAP_SEARCH, R.id.txtTreeMapSearch);
+        pbBars.put(TREE_MAP_SEARCH, R.id.pbTreeMapSearch);
+
+        textViews.put(TREE_MAP_REMOVE, R.id.txtTreeMapRemove);
+        pbBars.put(TREE_MAP_REMOVE, R.id.pbTreeMapRemove);
+
     }
      
     @Override
@@ -51,8 +76,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     @Override
     public void onFloatingCalculationButtonClicked() {
         if(view.get().isTabCollectionSelected()) {
-            view.get().setCollectionTestsExecutingUI();
-            runTests(model.getCollectionsTests());
+           // view.get().setCollectionTestsExecutingUI();
+           // runTests(model.getCollectionsTests());
         } else {
             view.get().setMapsTestsExecutingUI();
             runTests(model.getMapsTests());
@@ -74,25 +99,51 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                         }
                 );
     }
+    /*
+    vals.flatMap(val -> Observable.just(val)
+            .subscribeOn(Schedulers.computation())
+            .map(i -> intenseCalculation(i))
+            ).subscribe(val -> System.out.println(val));
+            */
 
-    private void runTests(ArrayList<Observable<TestTask>> tests) {
-        for(Observable<TestTask> test: tests) {
-            test.doOnNext(TestTask -> {
-                        long timeTaskExecution = model.execute(TestTask.getName());
-                        TestTask.setTime(timeTaskExecution);
-                        Log.d("rxJava", "Emitting item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
-                    }
-            )
-                    .subscribeOn(Schedulers.computation())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(TestTask -> {
-                                int txtID = TestTask.getTxtID();
-                                int pbID = TestTask.getPbID();
-                                view.get().setTestResult(txtID, String.valueOf(TestTask.getTime()));
-                                view.get().setProgressIndicator(pbID, INVISIBLE);
-                                Log.d("rxJava", "Consuming item " + TestTask.getName() + " on: " + Thread.currentThread().getName());
-                            }
-                    );
-        }
+
+    private void runTests(Observable<String> test) {
+        test.flatMap(String ->
+                Observable.just(String)
+                .subscribeOn(Schedulers.computation())
+                .map(i -> model.execute(String))
+                .observeOn(AndroidSchedulers.mainThread())
+        )
+                .subscribe(String -> {
+                            int txtID = textViews.get(String);
+                            int pbID = pbBars.get(String);
+                            long timeTaskExecution = model.getTestTime(String);
+                            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
+                            view.get().setProgressIndicator(pbID, INVISIBLE);
+                            Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
+                        }
+                );
     }
+
+
+    /*
+    private void runTests(Observable<String> test) {
+        test.doOnNext(String -> {
+                    model.execute(String);
+                    Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
+                }
+        )
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(String -> {
+                            int txtID = textViews.get(String);
+                            int pbID = pbBars.get(String);
+                            long timeTaskExecution = model.getTestTime(String);
+                            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
+                            view.get().setProgressIndicator(pbID, INVISIBLE);
+                            Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
+                        }
+                );
+    }
+    */
 }

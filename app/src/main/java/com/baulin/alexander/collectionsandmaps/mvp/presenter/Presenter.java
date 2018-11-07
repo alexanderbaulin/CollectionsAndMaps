@@ -36,6 +36,73 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     public Presenter() {
         App.getComponent().injectPresenter(this);
 
+        textViews.put(ARRAY_ADD_BEGIN, R.id.txtArrayAddBegin);
+        pbBars.put(ARRAY_ADD_BEGIN, R.id.pbArrayAddBegin);
+
+        textViews.put(ARRAY_ADD_MIDDLE, R.id.txtArrayAddMiddle);
+        pbBars.put(ARRAY_ADD_MIDDLE, R.id.pbArrayAddMiddle);
+
+        textViews.put(ARRAY_ADD_END, R.id.txtArrayAddEnd);
+        pbBars.put(ARRAY_ADD_END, R.id.pbArrayAddEnd);
+
+        textViews.put(ARRAY_SEARCH_VALUE, R.id.txtArraySearchValue);
+        pbBars.put(ARRAY_SEARCH_VALUE, R.id.pbArraySearchValue);
+
+        textViews.put(ARRAY_REMOVE_BEGIN, R.id.txtArrayRemoveBegin);
+        pbBars.put(ARRAY_REMOVE_BEGIN, R.id.pbArrayRemoveBegin);
+
+        textViews.put(ARRAY_REMOVE_MIDDLE, R.id.txtArrayRemoveMiddle);
+        pbBars.put(ARRAY_REMOVE_MIDDLE, R.id.pbArrayRemoveMiddle);
+
+        textViews.put(ARRAY_REMOVE_END, R.id.txtArrayRemoveEnd);
+        pbBars.put(ARRAY_REMOVE_END, R.id.pbArrayRemoveEnd);
+
+        textViews.put(LINKED_ADD_BEGIN, R.id.txtLinkedAddBegin);
+        pbBars.put(LINKED_ADD_BEGIN,  R.id.pbLinkedAddBegin);
+
+        textViews.put(LINKED_ADD_MIDDLE, R.id.txtLinkedAddMiddle);
+        pbBars.put(LINKED_ADD_MIDDLE, R.id.pbLinkedAddMiddle);
+
+        textViews.put(LINKED_ADD_END, R.id.txtLinkedAddEnd);
+        pbBars.put(LINKED_ADD_END, R.id.pbLinkedAddEnd);
+
+        textViews.put(LINKED_SEARCH_VALUE, R.id.txtLinkedSearchValue);
+        pbBars.put(LINKED_SEARCH_VALUE, R.id.pbLinkedSearchValue);
+
+        textViews.put(LINKED_REMOVE_BEGIN, R.id.txtLinkedRemoveBegin);
+        pbBars.put(LINKED_REMOVE_BEGIN, R.id.pbLinkedRemoveBegin);
+
+        textViews.put(LINKED_REMOVE_MIDDLE, R.id.txtLinkedRemoveMiddle);
+        pbBars.put(LINKED_REMOVE_MIDDLE, R.id.pbLinkedRemoveMiddle);
+
+
+        textViews.put(LINKED_REMOVE_END, R.id.txtLinkedRemoveEnd);
+        pbBars.put(LINKED_REMOVE_END, R.id.pbLinkedRemoveEnd);
+
+        textViews.put(COPY_ON_WRITE_BEGIN, R.id.txtCopyOnWriteAddBegin);
+        pbBars.put(COPY_ON_WRITE_BEGIN, R.id.pbCopyOnWriteAddBegin);
+
+        textViews.put(COPY_ON_WRITE_ADD_MIDDLE, R.id.txtCopyOnWriteAddMiddle);
+        pbBars.put(COPY_ON_WRITE_ADD_MIDDLE, R.id.pbCopyOnWriteAddMiddle);
+
+        textViews.put(COPY_ON_WRITE_ADD_END, R.id.txtCopyOnWriteAddEnd);
+        pbBars.put(COPY_ON_WRITE_ADD_END, R.id.pbCopyOnWriteAddEnd);
+
+        textViews.put(COPY_ON_WRITE_SEARCH_VALUE, R.id.txtCopyOnWriteSearchValue);
+        pbBars.put(COPY_ON_WRITE_SEARCH_VALUE, R.id.pbCopyOnWriteSearchValue);
+
+        textViews.put(COPY_ON_WRITE_REMOVE_BEGIN, R.id.txtCopyOnWriteRemoveBegin);
+        pbBars.put(COPY_ON_WRITE_REMOVE_BEGIN, R.id.pbCopyOnWriteRemoveBegin);
+
+        textViews.put(COPY_ON_WRITE_REMOVE_MIDDLE, R.id.txtCopyOnWriteRemoveMiddle);
+        pbBars.put(COPY_ON_WRITE_REMOVE_MIDDLE, R.id.pbCopyOnWriteRemoveMiddle);
+
+        textViews.put(COPY_ON_WRITE_REMOVE_END, R.id.txtCopyOnWriteRemoveEnd);
+        pbBars.put(COPY_ON_WRITE_REMOVE_END, R.id.pbCopyOnWriteRemoveEnd);
+
+
+
+
         textViews.put(HASH_MAP_ADD, R.id.txtHashMapAdd);
         pbBars.put(HASH_MAP_ADD, R.id.pbHashMapAdd);
 
@@ -77,8 +144,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     @Override
     public void onFloatingCalculationButtonClicked() {
         if(view.get().isTabCollectionSelected()) {
-           // view.get().setCollectionTestsExecutingUI();
-           // runTests(model.getCollectionsTests());
+            view.get().setCollectionTestsExecutingUI();
+            runTests(model.getCollectionsTests());
         } else {
             view.get().setMapsTestsExecutingUI();
             runTests(model.getMapsTests());
@@ -95,7 +162,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(String -> {
-                            if(String.compareToIgnoreCase("copyArrayList") == 0) view.get().setPostLoadingUI();
+                            if (String.compareToIgnoreCase("copyArrayList") == 0)
+                                view.get().setPostLoadingUI();
                             Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
                         }
                 );
@@ -105,9 +173,13 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     private void runTests(Observable<String> test) {
         test.flatMap(String ->
                 Observable.just(String)
-                .subscribeOn(Schedulers.computation())
-                .map(i -> execute(String))
-                .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.computation())
+                        .map(task -> {
+                            long timeTaskExecution = model.execute(task);
+                            testResults.put(task, timeTaskExecution);
+                            return task;
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
         )
                 .subscribe(String -> {
                             int txtID = textViews.get(String);
@@ -119,11 +191,4 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                         }
                 );
     }
-
-    private String execute(String task) {
-         long timeTaskExecution = model.execute(task);
-         testResults.put(task, timeTaskExecution);
-         return task;
-    }
-
 }

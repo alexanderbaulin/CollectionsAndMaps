@@ -2,12 +2,9 @@ package com.baulin.alexander.collectionsandmaps.mvp.model;
 
 import android.util.Log;
 
-import com.baulin.alexander.collectionsandmaps.R;
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 
-
-import java.util.TreeMap;
 
 import io.reactivex.Observable;
 
@@ -15,7 +12,7 @@ import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
 
 public class CollectionsAndMapsTests implements Model {
     static int number;
-    private TreeMap<String, Long> testResults = new TreeMap<>();
+   // private TreeMap<String, Long> testResults = new TreeMap<>();
 
     private String[] mapsAsyncTasks = {
             HASH_MAP_ADD,
@@ -27,30 +24,30 @@ public class CollectionsAndMapsTests implements Model {
             TREE_MAP_REMOVE
     };
 
-    private TestTask[] collectionsAsyncTasks = {
-            new TestTask(R.id.txtArrayAddBegin, R.id.pbArrayAddBegin, ARRAY_ADD_BEGIN),
-            new TestTask(R.id.txtArrayAddMiddle, R.id.pbArrayAddMiddle, ARRAY_ADD_MIDDLE),
-            new TestTask(R.id.txtArrayAddEnd, R.id.pbArrayAddEnd, ARRAY_ADD_END),
-            new TestTask(R.id.txtArraySearchValue, R.id.pbArraySearchValue, ARRAY_SEARCH_VALUE),
-            new TestTask(R.id.txtArrayRemoveBegin, R.id.pbArrayRemoveBegin, ARRAY_REMOVE_BEGIN),
-            new TestTask(R.id.txtArrayRemoveMiddle, R.id.pbArrayRemoveMiddle, ARRAY_REMOVE_MIDDLE),
-            new TestTask(R.id.txtArrayRemoveEnd, R.id.pbArrayRemoveEnd, ARRAY_REMOVE_END),
+    private String[] collectionsAsyncTasks = {
+            ARRAY_ADD_BEGIN,
+            ARRAY_ADD_MIDDLE,
+            ARRAY_ADD_END,
+            ARRAY_SEARCH_VALUE,
+            ARRAY_REMOVE_BEGIN,
+            ARRAY_REMOVE_MIDDLE,
+            ARRAY_REMOVE_END,
 
-            new TestTask(R.id.txtLinkedAddBegin, R.id.pbLinkedAddBegin, LINKED_ADD_BEGIN),
-            new TestTask(R.id.txtLinkedAddMiddle, R.id.pbLinkedAddMiddle, LINKED_ADD_MIDDLE),
-            new TestTask(R.id.txtLinkedAddEnd, R.id.pbLinkedAddEnd, LINKED_ADD_END),
-            new TestTask(R.id.txtLinkedSearchValue, R.id.pbLinkedSearchValue, LINKED_SEARCH_VALUE),
-            new TestTask(R.id.txtLinkedRemoveBegin, R.id.pbLinkedRemoveBegin, LINKED_REMOVE_BEGIN),
-            new TestTask(R.id.txtLinkedRemoveMiddle, R.id.pbLinkedRemoveMiddle, LINKED_REMOVE_MIDDLE),
-            new TestTask(R.id.txtLinkedRemoveEnd, R.id.pbLinkedRemoveEnd, LINKED_REMOVE_END),
+            LINKED_ADD_BEGIN,
+            LINKED_ADD_MIDDLE,
+            LINKED_ADD_END,
+            LINKED_SEARCH_VALUE,
+            LINKED_REMOVE_BEGIN,
+            LINKED_REMOVE_MIDDLE,
+            LINKED_REMOVE_END,
 
-            new TestTask(R.id.txtCopyOnWriteAddBegin, R.id.pbCopyOnWriteAddBegin, COPY_ON_WRITE_BEGIN),
-            new TestTask(R.id.txtCopyOnWriteAddMiddle, R.id.pbCopyOnWriteAddMiddle, COPY_ON_WRITE_ADD_MIDDLE),
-            new TestTask(R.id.txtCopyOnWriteAddEnd, R.id.pbCopyOnWriteAddEnd, COPY_ON_WRITE_ADD_END),
-            new TestTask(R.id.txtCopyOnWriteSearchValue, R.id.pbCopyOnWriteSearchValue, COPY_ON_WRITE_SEARCH_VALUE),
-            new TestTask(R.id.txtCopyOnWriteRemoveBegin, R.id.pbCopyOnWriteRemoveBegin, COPY_ON_WRITE_REMOVE_BEGIN),
-            new TestTask(R.id.txtCopyOnWriteRemoveMiddle, R.id.pbCopyOnWriteRemoveMiddle, COPY_ON_WRITE_REMOVE_MIDDLE),
-            new TestTask(R.id.txtCopyOnWriteRemoveEnd, R.id.pbCopyOnWriteRemoveEnd, COPY_ON_WRITE_REMOVE_END)
+            COPY_ON_WRITE_BEGIN,
+            COPY_ON_WRITE_ADD_MIDDLE,
+            COPY_ON_WRITE_ADD_END,
+            COPY_ON_WRITE_SEARCH_VALUE,
+            COPY_ON_WRITE_REMOVE_BEGIN,
+            COPY_ON_WRITE_REMOVE_MIDDLE,
+            COPY_ON_WRITE_REMOVE_END
     };
 
     public CollectionsAndMapsTests() {
@@ -170,7 +167,6 @@ public class CollectionsAndMapsTests implements Model {
 
 
         }
-        testResults.put(task, time);
         return time;
     }
 
@@ -179,13 +175,8 @@ public class CollectionsAndMapsTests implements Model {
     }
 
     @Override
-    public Observable<TestTask> getCollectionsTests() {
+    public Observable<String> getCollectionsTests() {
         return Observable.fromArray(collectionsAsyncTasks);
-    }
-
-    @Override
-    public long getTestTime(String name) {
-        return testResults.get(name);
     }
 
     @Override

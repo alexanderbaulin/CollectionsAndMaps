@@ -28,6 +28,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     private WeakReference<View> view;
     private TreeMap<String, Integer> textViews = new TreeMap<>();
     private TreeMap<String, Integer> pbBars = new TreeMap<>();
+    private TreeMap<String, Long> testResults = new TreeMap<>();
 
     @Inject
     Model model;
@@ -99,25 +100,19 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                         }
                 );
     }
-    /*
-    vals.flatMap(val -> Observable.just(val)
-            .subscribeOn(Schedulers.computation())
-            .map(i -> intenseCalculation(i))
-            ).subscribe(val -> System.out.println(val));
-            */
 
 
     private void runTests(Observable<String> test) {
         test.flatMap(String ->
                 Observable.just(String)
                 .subscribeOn(Schedulers.computation())
-                .map(i -> model.execute(String))
+                .map(i -> execute(String))
                 .observeOn(AndroidSchedulers.mainThread())
         )
                 .subscribe(String -> {
                             int txtID = textViews.get(String);
                             int pbID = pbBars.get(String);
-                            long timeTaskExecution = model.getTestTime(String);
+                            long timeTaskExecution = testResults.get(String);
                             view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
                             view.get().setProgressIndicator(pbID, INVISIBLE);
                             Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
@@ -125,25 +120,10 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                 );
     }
 
-
-    /*
-    private void runTests(Observable<String> test) {
-        test.doOnNext(String -> {
-                    model.execute(String);
-                    Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
-                }
-        )
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(String -> {
-                            int txtID = textViews.get(String);
-                            int pbID = pbBars.get(String);
-                            long timeTaskExecution = model.getTestTime(String);
-                            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
-                            view.get().setProgressIndicator(pbID, INVISIBLE);
-                            Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
-                        }
-                );
+    private String execute(String task) {
+         long timeTaskExecution = model.execute(task);
+         testResults.put(task, timeTaskExecution);
+         return task;
     }
-    */
+
 }

@@ -7,10 +7,9 @@ import io.reactivex.Observable;
 
 public interface Model {
     void setNumberOfElements(int number);
-    String execute(String task);
+    long execute(String task);
     Observable<String> getFillTasks();
     Observable<String> getMapsTests();
     Observable<TestTask> getCollectionsTests();
-
     long getTestTime(String name);
 }

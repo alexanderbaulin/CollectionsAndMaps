@@ -64,7 +64,7 @@ public class CollectionsAndMapsTests implements Model {
         number = numberOfElement;
     }
 
-    public String execute(String task) {
+    public long execute(String task) {
         Log.d("rxJava", "Emitting item " + task + " on: " + Thread.currentThread().getName());
         long time = 0;
         switch (task) {
@@ -171,7 +171,7 @@ public class CollectionsAndMapsTests implements Model {
 
         }
         testResults.put(task, time);
-        return task;
+        return time;
     }
 
     public Observable<String> getFillTasks() {

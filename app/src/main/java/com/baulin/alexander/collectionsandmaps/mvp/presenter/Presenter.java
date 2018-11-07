@@ -7,10 +7,8 @@ import com.baulin.alexander.collectionsandmaps.R;
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
-import com.baulin.alexander.collectionsandmaps.mvp.model.TestTask;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 import javax.inject.Inject;
@@ -154,19 +152,23 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
 
     private void fillCollectionsAndMaps() {
         model.getFillTasks()
-                .doOnNext(String -> {
+                .flatMap(String ->
+                Observable.just(String)
+                        .subscribeOn(Schedulers.computation())
+                        .map(task -> {
                             model.execute(String);
                             Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
-                        }
-                )
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
+                            return task;
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+        )
                 .subscribe(String -> {
-                            if (String.compareToIgnoreCase("copyArrayList") == 0)
-                                view.get().setPostLoadingUI();
-                            Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
+                        if (String.compareToIgnoreCase("copyArrayList") == 0)
+                        view.get().setPostLoadingUI();
+                         Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
                         }
                 );
+
     }
 
 

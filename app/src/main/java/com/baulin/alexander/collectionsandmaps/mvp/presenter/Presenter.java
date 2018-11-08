@@ -27,6 +27,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     private TreeMap<String, Integer> textViews = new TreeMap<>();
     private TreeMap<String, Integer> pbBars = new TreeMap<>();
     private TreeMap<String, Long> testResults = new TreeMap<>();
+    private int executingCollectionsTests = 0;
 
     @Inject
     Model model;
@@ -144,9 +145,11 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
         if(view.get().isTabCollectionSelected()) {
             view.get().setCollectionTestsExecutingUI();
             runTests(model.getCollectionsTests());
+            executingCollectionsTests +=21;
         } else {
             view.get().setMapsTestsExecutingUI();
             runTests(model.getMapsTests());
+            executingCollectionsTests +=6;
         }
     }
 
@@ -189,6 +192,8 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                             long timeTaskExecution = testResults.get(String);
                             view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
                             view.get().setProgressIndicator(pbID, INVISIBLE);
+                            executingCollectionsTests--;
+                            if(executingCollectionsTests == 0) view.get().setTestsPostExecutingUI();
                             Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
                         }
                 );

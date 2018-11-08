@@ -12,4 +12,6 @@ public interface View {
     void setTestResult(int txtID, String result);
     void setCollectionTestsExecutingUI();
     void setMapsTestsExecutingUI();
+
+    void setTestsPostExecutingUI();
 }

@@ -145,11 +145,18 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     @Override
     public void setCollectionTestsExecutingUI() {
         pageAdapter.setCollectionProgressBarsVisible();
+        fixScreenOrientation(true);
     }
 
     @Override
     public void setMapsTestsExecutingUI() {
         pageAdapter.setMapsProgressBarsVisible();
+        fixScreenOrientation(true);
+    }
+
+    @Override
+    public void setTestsPostExecutingUI() {
+        fixScreenOrientation(false);
     }
 
     private void fixScreenOrientation(boolean fixScreen) {

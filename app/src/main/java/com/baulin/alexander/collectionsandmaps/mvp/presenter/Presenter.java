@@ -144,12 +144,12 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     public void onFloatingCalculationButtonClicked() {
         if(view.get().isTabCollectionSelected()) {
             view.get().setCollectionTestsExecutingUI();
-            runTests(model.getCollectionsTests());
             executingCollectionsTests +=21;
+            runTests(model.getCollectionsTests());
         } else {
             view.get().setMapsTestsExecutingUI();
-            runTests(model.getMapsTests());
             executingCollectionsTests +=6;
+            runTests(model.getMapsTests());
         }
     }
 

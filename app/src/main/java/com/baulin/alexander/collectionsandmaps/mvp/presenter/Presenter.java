@@ -177,7 +177,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
 
     private void runTests(Observable<String> test) {
         test.flatMap(String ->
-                Observable.just(String)
+                Observable.defer(() -> Observable.just(String))
                         .subscribeOn(Schedulers.computation())
                         .map(task -> {
                             long timeTaskExecution = model.execute(task);

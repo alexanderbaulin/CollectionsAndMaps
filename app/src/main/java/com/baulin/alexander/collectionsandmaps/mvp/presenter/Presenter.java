@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.baulin.alexander.collectionsandmaps.R;
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
+import com.baulin.alexander.collectionsandmaps.dagger2.components.AppComponent;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.View;
 
@@ -33,7 +34,9 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     Model model;
 
     public Presenter() {
-        App.getComponent().injectPresenter(this);
+        //App.getComponent().injectPresenter(this);
+        AppComponent component = App.getComponent();
+        if(component != null) component.injectPresenter(this);
 
         textViews.put(ARRAY_ADD_BEGIN, R.id.txtArrayAddBegin);
         pbBars.put(ARRAY_ADD_BEGIN, R.id.pbArrayAddBegin);
@@ -135,7 +138,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
             return;
         }
         model.setNumberOfElements(Integer.valueOf(number));
-        Log.d("myLogs5", "button " + Integer.valueOf(number));
+       // Log.d("myLogs5", "button " + Integer.valueOf(number));
         view.get().setPostSubmitClickedUI();
         fillCollectionsAndMaps();
     }
@@ -160,7 +163,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                         .subscribeOn(Schedulers.computation())
                         .map(task -> {
                             model.execute(String);
-                            Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
+                           // Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
                             return task;
                         })
                         .observeOn(AndroidSchedulers.mainThread())
@@ -168,7 +171,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                 .subscribe(String -> {
                         if (String.compareToIgnoreCase("copyArrayList") == 0)
                         view.get().setPostLoadingUI();
-                         Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
+                         //Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
                         }
                 );
 
@@ -194,7 +197,7 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                             view.get().setProgressIndicator(pbID, INVISIBLE);
                             executingCollectionsTests--;
                             if(executingCollectionsTests == 0) view.get().setTestsPostExecutingUI();
-                            Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
+                            //Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
                         }
                 );
     }

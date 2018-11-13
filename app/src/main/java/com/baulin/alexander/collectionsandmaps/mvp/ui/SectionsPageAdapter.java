@@ -33,7 +33,7 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.d("test", "getItem " + position);
+       // Log.d("test", "getItem " + position);
         switch (position) {
             case 0:
                 return new CollectionsFragment();
@@ -48,7 +48,7 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment createdFragment = (Fragment)super.instantiateItem(container, position);
-        Log.d("test", "instantiateItem " + position);
+       // Log.d("test", "instantiateItem " + position);
         switch (position) {
             case 0:
                 collections = (CollectionsFragment) createdFragment;

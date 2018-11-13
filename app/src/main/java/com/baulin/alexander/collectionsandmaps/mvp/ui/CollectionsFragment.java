@@ -81,7 +81,7 @@ public class CollectionsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.collections, container, false);
-        Log.d("myLogs6", "onCreateView");
+       // Log.d("myLogs6", "onCreateView");
         unbinder = ButterKnife.bind(this, view);
 
         textViews = new TreeMap<>();
@@ -160,7 +160,7 @@ public class CollectionsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d("myLogs6", "onDestroyView");
+       // Log.d("myLogs6", "onDestroyView");
         unbinder.unbind();
     }
 

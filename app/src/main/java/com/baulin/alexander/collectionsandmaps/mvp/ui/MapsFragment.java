@@ -72,7 +72,7 @@ public class MapsFragment extends Fragment {
         putProgressBar(pbTreeMapSearch);
         putProgressBar(pbTreeMapRemove);
 
-        Log.d("rotate_crush", "Фрагмент в onCreateView " + this.toString());
+       // Log.d("rotate_crush", "Фрагмент в onCreateView " + this.toString());
 
         return view;
     }

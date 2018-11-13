@@ -17,7 +17,7 @@ class MapsTest {
         for(int i = 0; i < CollectionsAndMapsTests.number; i++) {
             map.put(i, i);
         }
-        Log.d("myLogs", map.getClass() + " filled with elements");
+       // Log.d("myLogs", map.getClass() + " filled with elements");
     }
 
     synchronized static long addNew(Map<Integer, Integer> map) {

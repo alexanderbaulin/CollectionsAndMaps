@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
+import com.baulin.alexander.collectionsandmaps.dagger2.components.AppComponent;
 import com.baulin.alexander.collectionsandmaps.dagger2.components.DaggerMainActivityComponent;
 import com.baulin.alexander.collectionsandmaps.dagger2.components.MainActivityComponent;
 import com.baulin.alexander.collectionsandmaps.dagger2.modules.MainActivityModule;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Log.d("myLogs", "onCreate");
+      //  Log.d("myLogs", "onCreate");
 
         ButterKnife.bind(this);
 
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
         if(savedInstanceState == null) {
             fixScreenOrientation(true);
-            Log.d("test", "saveInstanceState = null");
+          //  Log.d("test", "saveInstanceState = null");
         }
     }
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        Log.d("restore", "restore");
+       // Log.d("restore", "restore");
         setPostSubmitClickedUI();
         setPostLoadingUI();
         super.onRestoreInstanceState(savedInstanceState);
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
     @Override
     public boolean isTabCollectionSelected() {
-        Log.d("test", "item = " + viewPager.getCurrentItem()) ;
+       // Log.d("test", "item = " + viewPager.getCurrentItem()) ;
         TabLayout.Tab tabCollection = tabLayout.getTabAt(0);
         return tabCollection != null && tabCollection.isSelected();
     }

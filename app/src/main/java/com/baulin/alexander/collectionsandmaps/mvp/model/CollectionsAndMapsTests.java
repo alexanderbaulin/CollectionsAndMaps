@@ -3,6 +3,7 @@ package com.baulin.alexander.collectionsandmaps.mvp.model;
 import android.util.Log;
 
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
+import com.baulin.alexander.collectionsandmaps.dagger2.components.AppComponent;
 import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 
 
@@ -12,7 +13,6 @@ import static com.baulin.alexander.collectionsandmaps.mvp.model.Constants.*;
 
 public class CollectionsAndMapsTests implements Model {
     static int number;
-   // private TreeMap<String, Long> testResults = new TreeMap<>();
 
     private String[] mapsAsyncTasks = {
             HASH_MAP_ADD,
@@ -51,7 +51,8 @@ public class CollectionsAndMapsTests implements Model {
     };
 
     public CollectionsAndMapsTests() {
-        App.getComponent().injectTests(this);
+        AppComponent component = App.getComponent();
+        if(component != null) component.injectTests(this);
     }
 
 
@@ -62,7 +63,7 @@ public class CollectionsAndMapsTests implements Model {
     }
 
     public long execute(String task) {
-        Log.d("rxJava", "Emitting item " + task + " on: " + Thread.currentThread().getName());
+       // Log.d("rxJava", "Emitting item " + task + " on: " + Thread.currentThread().getName());
         long time = 0;
         switch (task) {
             case ARRAY_LIST:

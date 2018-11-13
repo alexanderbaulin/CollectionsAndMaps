@@ -18,10 +18,10 @@ class CollectionsTest {
 
     static void fillWithElements(List<Integer> list) {
         for(int i = 0; i < CollectionsAndMapsTests.number; i++) {
-            if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
+           // if(list.getClass().toString().equals("class java.util.concurrent.CopyOnWriteArrayList"))  Log.d("myLogs", list.getClass() + "add element " + i);
             list.add(i);
         }
-        Log.d("myLogs", list.getClass() + " filled with elements");
+//        Log.d("myLogs", list.getClass() + " filled with elements");
     }
 
     synchronized static long addInTheBegin(List<Integer> list) {

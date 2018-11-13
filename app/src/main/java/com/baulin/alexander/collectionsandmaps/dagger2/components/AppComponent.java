@@ -2,6 +2,7 @@ package com.baulin.alexander.collectionsandmaps.dagger2.components;
 
 
 import com.baulin.alexander.collectionsandmaps.dagger2.modules.AppModule;
+import com.baulin.alexander.collectionsandmaps.mvp.interfaces.Model;
 import com.baulin.alexander.collectionsandmaps.mvp.model.CollectionsAndMapsTests;
 import com.baulin.alexander.collectionsandmaps.mvp.presenter.Presenter;
 
@@ -16,4 +17,5 @@ import dagger.Component;
 public interface AppComponent {
     void injectPresenter(Presenter presenter);
     void injectTests(CollectionsAndMapsTests tests);
+    Model getTests();
 }

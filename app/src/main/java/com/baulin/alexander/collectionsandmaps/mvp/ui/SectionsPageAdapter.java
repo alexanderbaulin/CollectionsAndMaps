@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-class SectionsPageAdapter extends FragmentPagerAdapter {
+public class SectionsPageAdapter extends FragmentPagerAdapter {
     private CollectionsFragment collections;
     private MapsFragment maps;
 
@@ -48,7 +48,7 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Fragment createdFragment = (Fragment)super.instantiateItem(container, position);
-       // Log.d("test", "instantiateItem " + position);
+           // Log.d("test", "instantiateItem " + position);
         switch (position) {
             case 0:
                 collections = (CollectionsFragment) createdFragment;
@@ -65,7 +65,7 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
         return 2;
     }
 
-    ProgressBar getProgressBar(int id) {
+    public ProgressBar getProgressBar(int id) {
         ProgressBar view = maps.getProgressBar(id);
         if(view != null)
             return view;
@@ -73,7 +73,7 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
             return collections.getProgressBar(id);
     }
 
-    TextView getTextView(int id) {
+    public TextView getTextView(int id) {
         TextView view = maps.getTextView(id);
         if(view != null)
             return view;
@@ -81,11 +81,11 @@ class SectionsPageAdapter extends FragmentPagerAdapter {
             return collections.getTextView(id);
     }
 
-    void setCollectionProgressBarsVisible() {
+    public void setCollectionProgressBarsVisible() {
         collections.setProgressBarsVisible();
     }
 
-    void setMapsProgressBarsVisible() {
+    public void setMapsProgressBarsVisible() {
         maps.setProgressBarsVisible();
     }
 }

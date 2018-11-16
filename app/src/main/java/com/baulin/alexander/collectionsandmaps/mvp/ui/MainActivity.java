@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -160,11 +161,19 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
         fixScreenOrientation(false);
     }
 
-    private void fixScreenOrientation(boolean fixScreen) {
+    public void fixScreenOrientation(boolean fixScreen) {
         if(fixScreen) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
+    }
+
+    public void setPageAdapter(SectionsPageAdapter adapter) {
+        pageAdapter = adapter;
+    }
+
+    public void setPresenter(Presenter p) {
+        presenter = p;
     }
 }

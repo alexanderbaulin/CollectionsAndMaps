@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
+    buildToolsVersion "28.0.3"
+
     defaultConfig {
         applicationId "com.baulin.alexander.collectionsandmaps"
         minSdkVersion 21
@@ -23,6 +25,10 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
 }
 
 dependencies {
@@ -37,10 +43,13 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    compile 'com.google.dagger:dagger:2.17'
-    compile 'com.google.dagger:dagger-android-support:2.17'
+    implementation 'com.google.dagger:dagger:2.17'
+    implementation 'com.google.dagger:dagger-android-support:2.17'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.17'
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
+
+    testImplementation "org.mockito:mockito-core:2.23.0"
+    androidTestImplementation "org.mockito:mockito-android:2.23.0"
 }

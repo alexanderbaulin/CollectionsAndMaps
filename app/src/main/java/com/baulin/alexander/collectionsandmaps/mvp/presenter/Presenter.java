@@ -15,7 +15,9 @@ import java.util.TreeMap;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.*;
@@ -154,6 +156,10 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
             executingCollectionsTests +=6;
             runTests(model.getMapsTests());
         }
+    }
+
+    public void setModel(Model m) {
+        model = m;
     }
 
     private void fillCollectionsAndMaps() {

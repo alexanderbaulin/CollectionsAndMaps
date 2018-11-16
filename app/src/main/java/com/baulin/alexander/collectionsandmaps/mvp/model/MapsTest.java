@@ -13,7 +13,7 @@ class MapsTest {
     private static Integer testKey = 1;
     private static Integer testValue = 1;
 
-    static void fillWithElements(Map<Integer, Integer> map) {
+    synchronized static void fillWithElements(Map<Integer, Integer> map) {
         for(int i = 0; i < CollectionsAndMapsTests.number; i++) {
             map.put(i, i);
         }
@@ -21,11 +21,6 @@ class MapsTest {
     }
 
     synchronized static long addNew(Map<Integer, Integer> map) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         long timeStart = System.nanoTime();
         map.put(testKey, testValue);
         long timeEnd = System.nanoTime();
@@ -33,11 +28,6 @@ class MapsTest {
     }
 
     synchronized static long searchByKey(Map<Integer, Integer> map) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         long timeStart = System.nanoTime();
         map.get(testKey);
         long timeEnd = System.nanoTime();
@@ -45,11 +35,6 @@ class MapsTest {
     }
 
     synchronized static long remove(Map<Integer, Integer> map) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         long timeStart = System.nanoTime();
         map.remove(testKey);
         long timeEnd = System.nanoTime();

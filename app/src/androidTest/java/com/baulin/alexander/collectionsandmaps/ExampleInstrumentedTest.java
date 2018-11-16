@@ -45,7 +45,7 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
         assertEquals("com.baulin.alexander.collectionsandmaps", appContext.getPackageName());
     }
-
+    /*
     @Test
     public void inputStringTest() {
         onView(withId(R.id.editNumber)).perform(typeText(""));
@@ -66,6 +66,7 @@ public class ExampleInstrumentedTest {
 
         main.get().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
+    */
 
 
 

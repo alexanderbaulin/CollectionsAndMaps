@@ -53,23 +53,32 @@ class CollectionsTest {
     }
 
     synchronized static long removeInTheBegin(List<Integer> list) {
-        long timeStart = System.nanoTime();
-        list.remove(0);
-        long timeEnd = System.nanoTime();
-        return (timeEnd - timeStart)/1000;
+        if(list.size() != 0) {
+            long timeStart = System.nanoTime();
+            list.remove(0);
+            long timeEnd = System.nanoTime();
+            return (timeEnd - timeStart) / 1000;
+        }
+        return 0;
     }
 
     synchronized static long removeInTheEnd(List<Integer> list) {
-        long timeStart = System.nanoTime();
-        list.remove(list.size()-1);
-        long timeEnd = System.nanoTime();
-        return (timeEnd - timeStart)/1000;
+        if(list.size() != 0) {
+            long timeStart = System.nanoTime();
+            list.remove(list.size() - 1);
+            long timeEnd = System.nanoTime();
+            return (timeEnd - timeStart) / 1000;
+        }
+        return 0;
     }
 
     synchronized static long removeInTheMiddle(List<Integer> list) {
-        long timeStart = System.nanoTime();
-        list.remove(list.size()/2);
-        long timeEnd = System.nanoTime();
-        return (timeEnd - timeStart)/1000;
+        if(list.size() != 0) {
+            long timeStart = System.nanoTime();
+            list.remove(list.size() / 2);
+            long timeEnd = System.nanoTime();
+            return (timeEnd - timeStart) / 1000;
+        }
+        return 0;
     }
 }

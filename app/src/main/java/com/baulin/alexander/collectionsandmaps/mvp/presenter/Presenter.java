@@ -1,6 +1,7 @@
 package com.baulin.alexander.collectionsandmaps.mvp.presenter;
 
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.baulin.alexander.collectionsandmaps.R;
@@ -139,6 +140,12 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
             view.get().showToast("Enter number");
             return;
         }
+
+        if(number.equals("0")) {
+            view.get().showToast("Enter number > 0");
+            return;
+        }
+
         model.setNumberOfElements(Integer.valueOf(number));
        // Log.d("myLogs5", "button " + Integer.valueOf(number));
         view.get().setPostSubmitClickedUI();
@@ -165,15 +172,15 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     private void fillCollectionsAndMaps() {
         model.getFillTasks()
                 .flatMap(String ->
-                Observable.just(String)
-                        .subscribeOn(Schedulers.computation())
-                        .map(task -> {
-                            model.execute(String);
-                           // Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
-                            return task;
-                        })
-                        .observeOn(AndroidSchedulers.mainThread())
-        )
+                        Observable.just(String)
+                                .subscribeOn(Schedulers.computation())
+                                .map(task -> {
+                                    model.execute(task);
+                                    // Log.d("rxJava", "Emitting item " + String + " on: " + Thread.currentThread().getName());
+                                    return task;
+                                })
+                                .observeOn(AndroidSchedulers.mainThread())
+                )
                 .subscribe(String -> {
                         if (String.compareToIgnoreCase("copyArrayList") == 0)
                         view.get().setPostLoadingUI();
@@ -184,9 +191,10 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     }
 
 
+    @SuppressLint("CheckResult")
     private void runTests(Observable<String> test) {
         test.flatMap(String ->
-                Observable.defer(() -> Observable.just(String))
+                Observable.just(String)
                         .subscribeOn(Schedulers.computation())
                         .map(task -> {
                             long timeTaskExecution = model.execute(task);

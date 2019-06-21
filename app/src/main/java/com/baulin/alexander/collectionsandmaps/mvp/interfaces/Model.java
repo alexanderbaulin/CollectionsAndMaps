@@ -1,12 +1,13 @@
 package com.baulin.alexander.collectionsandmaps.mvp.interfaces;
 
 
+import com.baulin.alexander.collectionsandmaps.mvp.model.Fillable;
+import com.baulin.alexander.collectionsandmaps.mvp.model.Test;
+
 import io.reactivex.Observable;
 
 public interface Model {
-    void setNumberOfElements(int number);
-    long execute(String task);
-    Observable<String> getFillTasks();
-    Observable<String> getMapsTests();
-    Observable<String> getCollectionsTests();
+    Observable<Test> getMapsTests();
+    Observable<Test> getCollectionsTests();
+    Observable<Fillable> getFillTasks();
 }

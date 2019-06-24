@@ -52,33 +52,41 @@ public class CollectionsAndMapsTests implements Model {
             new TreeMapRemoveElementTest()
     };
 
-    private Test[] collectionsTests = {
+    private Test[] collectionsTestsAddAndSearch = {
             new ArrayListAddElementInBeginTest(),
             new ArrayListAddElementInMiddleTest(),
             new ArrayListAddElementInEndTest(),
             new ArrayListSearchElementTest(),
-            new ArrayListRemoveElementInBeginTest(),
-            new ArrayListRemoveElementInMiddleTest(),
-            new ArrayListRemoveElementInEndTest(),
 
             new LinkedListAddElementInBeginTest(),
             new LinkedListAddElementInMiddleTest(),
             new LinkedListAddElementInEndTest(),
             new LinkedListSearchElementTest(),
-            new LinkedListRemoveElementInBeginTest(),
-            new LinkedListRemoveElementInMiddleTest(),
-            new LinkedListRemoveElementInEndTest(),
 
             new CopyOnWriteAddElementInBeginTest(),
             new CopyOnWriteAddElementInMiddleTest(),
             new CopyOnWriteAddElementInEndTest(),
             new CopyOnWriteSearchElementTest(),
-            new CopyOnWriteRemoveElementInBeginTest(),
-            new CopyOnWriteRemoveElementInMiddleTest(),
-            new CopyOnWriteRemoveElementInEndTest()
-
-
     };
+
+    private Test[] collectionsTestsRemoveEnd = {
+            new ArrayListRemoveElementInEndTest(),
+            new LinkedListRemoveElementInEndTest(),
+            new CopyOnWriteRemoveElementInEndTest()
+    };
+
+    private Test[] collectionsTestsRemoveMiddle = {
+            new ArrayListRemoveElementInMiddleTest(),
+            new LinkedListRemoveElementInMiddleTest(),
+            new CopyOnWriteRemoveElementInMiddleTest(),
+    };
+
+    private Test[] collectionsTestsRemoveBegin = {
+            new ArrayListRemoveElementInBeginTest(),
+            new LinkedListRemoveElementInBeginTest(),
+            new CopyOnWriteRemoveElementInBeginTest()
+    };
+
 
     private Fillable[] fillTasks = {
         new ArrayListTest(),
@@ -94,18 +102,33 @@ public class CollectionsAndMapsTests implements Model {
     }
 
     @Override
+    public Observable<Fillable> getFillTasks() {
+        return Observable.fromArray(fillTasks);
+    }
+
+    @Override
     public Observable<Test> getMapsTests() {
         return Observable.fromArray(mapsTests);
     }
 
     @Override
-    public Observable<Test> getCollectionsTests() {
-        return Observable.fromArray(collectionsTests);
+    public Observable<Test> getCollectionsTestsAddAndSearch() {
+        return Observable.fromArray(collectionsTestsAddAndSearch);
     }
 
     @Override
-    public Observable<Fillable> getFillTasks() {
-        return Observable.fromArray(fillTasks);
+    public Observable<Test> getCollectionsTestsDeleteFromEnd() {
+        return Observable.fromArray(collectionsTestsRemoveEnd);
+    }
+
+    @Override
+    public Observable<Test> getCollectionsTestsDeleteFromMiddle() {
+        return Observable.fromArray(collectionsTestsRemoveMiddle);
+    }
+
+    @Override
+    public Observable<Test> getCollectionsTestsDeleteFromBegin() {
+        return Observable.fromArray(collectionsTestsRemoveBegin);
     }
 
 }

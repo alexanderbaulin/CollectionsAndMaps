@@ -24,6 +24,7 @@ import static android.view.View.*;
 public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.Presenter {
     private WeakReference<View> view;
     private int executingTests = 0;
+    private int collectionTestsGroupPriority = 0;
     private int numberOfElements;
 
     @Inject
@@ -62,11 +63,11 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
         if(view.get().isTabCollectionSelected()) {
             view.get().setCollectionTestsExecutingUI();
             executingTests +=21;
-            runTests(model.getCollectionsTests());
+            runCollectionsTests();
         } else {
             view.get().setMapsTestsExecutingUI();
             executingTests +=6;
-            runTests(model.getMapsTests());
+            runMapsTests(model.getMapsTests());
         }
     }
 
@@ -95,12 +96,41 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
         view.get().setPostLoadingUI();
     }
 
-    private void runTests(Observable<Test> tests) {
+    private void runCollectionsTests(Observable<Test> tests) {
         tests.flatMap(Test ->
                 Observable.just(Test)
                         .subscribeOn(Schedulers.computation())
                         .map(asyncTask -> {
                             long timeTaskExecution = asyncTask.run();
+                            //Log.d("rxJava", "Running " + Test.getStringId() + " on: " + Thread.currentThread().getName());
+                            // testResults.put(task.getStringId(), timeTaskExecution);
+                            asyncTask.getStringId();
+                            return asyncTask; ///////////// task.getStringId()
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+        )
+                .doOnComplete(this::runCollectionsTests)
+                .subscribe(Test -> {
+                            int txtID = Test.getTxtViewID();
+                            int pbID = Test.getPbViewID();
+                            long timeTaskExecution = Test.getResult();
+                            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
+                            view.get().setProgressIndicator(pbID, INVISIBLE);
+                            executingTests--;
+                            if(executingTests == 0) view.get().setTestsPostExecutingUI();
+
+                           // Log.d("rxJava", "Consuming item " + Test.getStringId() + " on: " + Thread.currentThread().getName());
+                        }
+                );
+    }
+
+    private void runMapsTests(Observable<Test> tests) {
+        tests.flatMap(Test ->
+                Observable.just(Test)
+                        .subscribeOn(Schedulers.computation())
+                        .map(asyncTask -> {
+                            long timeTaskExecution = asyncTask.run();
+                            //Log.d("rxJava", "Running " + Test.getStringId() + " on: " + Thread.currentThread().getName());
                             // testResults.put(task.getStringId(), timeTaskExecution);
                             asyncTask.getStringId();
                             return asyncTask; ///////////// task.getStringId()
@@ -115,8 +145,31 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
                             view.get().setProgressIndicator(pbID, INVISIBLE);
                             executingTests--;
                             if(executingTests == 0) view.get().setTestsPostExecutingUI();
-                            //Log.d("rxJava", "Consuming item " + String + " on: " + Thread.currentThread().getName());
+                            // Log.d("rxJava", "Consuming item " + Test.getStringId() + " on: " + Thread.currentThread().getName());
                         }
                 );
+    }
+
+    private void runCollectionsTests() {
+        switch (collectionTestsGroupPriority) {
+            case 0:
+                runCollectionsTests(model.getCollectionsTestsAddAndSearch());
+                collectionTestsGroupPriority++;
+                break;
+            case 1:
+                runCollectionsTests(model.getCollectionsTestsDeleteFromEnd());
+                collectionTestsGroupPriority++;
+                break;
+            case 2:
+                runCollectionsTests(model.getCollectionsTestsDeleteFromMiddle());
+                collectionTestsGroupPriority++;
+                break;
+            case 3:
+                runCollectionsTests(model.getCollectionsTestsDeleteFromBegin());
+                collectionTestsGroupPriority++;
+                break;
+            default:
+                collectionTestsGroupPriority = 0;
+        }
     }
 }

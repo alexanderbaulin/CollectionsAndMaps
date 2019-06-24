@@ -11,19 +11,15 @@ public class LinkedListRemoveElementInBeginTest extends LinkedListTest implement
     private long result;
 
 
-
     @Override
     synchronized public long run() {
+        long timeStart = System.nanoTime();
+        linkedList.remove(0);
+        long timeEnd = System.nanoTime();
 
-        if(linkedList.size() != 0) {
-            long timeStart = System.nanoTime();
-            linkedList.remove(0);
-            long timeEnd = System.nanoTime();
+        result = (timeEnd - timeStart) / 1000;
+        return result;
 
-            result = (timeEnd - timeStart) / 1000;
-            return result;
-        }
-        return 0;
     }
 
     @Override

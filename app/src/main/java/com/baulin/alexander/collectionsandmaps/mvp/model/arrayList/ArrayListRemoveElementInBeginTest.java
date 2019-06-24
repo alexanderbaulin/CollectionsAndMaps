@@ -12,15 +12,14 @@ public class ArrayListRemoveElementInBeginTest extends ArrayListTest implements 
 
     @Override
     public long run() {
-        if(arrayList.size() != 0) {
-            long timeStart = System.nanoTime();
-            arrayList.remove(0);
-            long timeEnd = System.nanoTime();
 
-            result = (timeEnd - timeStart) / 1000;
-            return result;
-        }
-        return 0;
+        long timeStart = System.nanoTime();
+        arrayList.remove(0);
+        long timeEnd = System.nanoTime();
+
+        result = (timeEnd - timeStart) / 1000;
+        return result;
+
     }
 
     @Override

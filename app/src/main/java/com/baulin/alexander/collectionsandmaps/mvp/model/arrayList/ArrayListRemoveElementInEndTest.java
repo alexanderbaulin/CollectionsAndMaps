@@ -11,16 +11,13 @@ public class ArrayListRemoveElementInEndTest extends ArrayListTest implements Te
 
     @Override
     public long run() {
-        if(arrayList.size() != 0) {
-            long timeStart = System.nanoTime();
-            arrayList.remove(arrayList.size() - 1);
-            long timeEnd = System.nanoTime();
+        long timeStart = System.nanoTime();
+        arrayList.remove(arrayList.size() - 1);
+        long timeEnd = System.nanoTime();
 
-            result = (timeEnd - timeStart) / 1000;
+        result = (timeEnd - timeStart) / 1000;
 
-            return result;
-        }
-        return 0;
+        return result;
     }
 
     @Override

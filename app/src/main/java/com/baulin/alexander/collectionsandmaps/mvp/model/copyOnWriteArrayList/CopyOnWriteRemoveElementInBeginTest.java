@@ -13,15 +13,12 @@ public class CopyOnWriteRemoveElementInBeginTest extends CopyOnWriteTest impleme
 
     @Override
     public long run() {
-        if(copyOnWriteArrayList.size() != 0) {
-            long timeStart = System.nanoTime();
-            copyOnWriteArrayList.remove(0);
-            long timeEnd = System.nanoTime();
+        long timeStart = System.nanoTime();
+        copyOnWriteArrayList.remove(0);
+        long timeEnd = System.nanoTime();
 
-            result = (timeEnd - timeStart) / 1000;
-            return result;
-        }
-        return 0;
+        result = (timeEnd - timeStart) / 1000;
+        return result;
     }
 
     @Override

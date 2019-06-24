@@ -7,7 +7,12 @@ import com.baulin.alexander.collectionsandmaps.mvp.model.Test;
 import io.reactivex.Observable;
 
 public interface Model {
-    Observable<Test> getMapsTests();
-    Observable<Test> getCollectionsTests();
     Observable<Fillable> getFillTasks();
+
+    Observable<Test> getMapsTests();
+
+    Observable<Test> getCollectionsTestsAddAndSearch();
+    Observable<Test> getCollectionsTestsDeleteFromEnd();
+    Observable<Test> getCollectionsTestsDeleteFromMiddle();
+    Observable<Test> getCollectionsTestsDeleteFromBegin();
 }

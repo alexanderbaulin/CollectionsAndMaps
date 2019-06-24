@@ -78,7 +78,7 @@ public class PresenterTest {
         when(activity.getInputNumber()).thenReturn("1");
         when(tests.getFillTasks()).thenReturn(Observable.just(ARRAY_LIST, LINKED_LIST, HASH_MAP, TREE_MAP, COPY_ARRAY_LIST));
         when(tests.getMapsTests()).thenReturn(Observable.fromArray(mapsAsyncTasks));
-        when(tests.getCollectionsTests()).thenReturn(Observable.fromArray(collectionsAsyncTasks));
+        when(tests.getCollectionsTestsAddAndSearch()).thenReturn(Observable.fromArray(collectionsAsyncTasks));
 
 
     }

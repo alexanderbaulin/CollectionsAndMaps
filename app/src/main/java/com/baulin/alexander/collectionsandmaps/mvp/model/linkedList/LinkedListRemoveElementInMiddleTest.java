@@ -13,16 +13,13 @@ public class LinkedListRemoveElementInMiddleTest extends LinkedListTest implemen
 
     @Override
     public long run() {
-        if(linkedList.size() != 0) {
-            long timeStart = System.nanoTime();
-            linkedList.remove(linkedList.size() / 2);
-            long timeEnd = System.nanoTime();
+        long timeStart = System.nanoTime();
+        linkedList.remove(linkedList.size() / 2);
+        long timeEnd = System.nanoTime();
 
-            result = (timeEnd - timeStart) / 1000;
+        result = (timeEnd - timeStart) / 1000;
 
-            return result;
-        }
-        return 0;
+        return result;
     }
 
     @Override

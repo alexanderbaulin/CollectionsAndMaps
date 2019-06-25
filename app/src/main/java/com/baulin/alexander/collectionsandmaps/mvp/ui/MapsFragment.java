@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.baulin.alexander.collectionsandmaps.R;
+import com.baulin.alexander.collectionsandmaps.mvp.model.Constants;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,13 +25,13 @@ import butterknife.Unbinder;
 
 public class MapsFragment extends Fragment {
 
-    @BindView(R.id.txtHashMapAdd) TextView hashMapAdd;
-    @BindView(R.id.txtHashMapSearch) TextView hashMapSearch;
-    @BindView(R.id.txtHashMapRemove) TextView hashMapRemove;
+    @BindView(R.id.txtHashMapAdd) TextView txtHashMapAdd;
+    @BindView(R.id.txtHashMapSearch) TextView txtHashMapSearch;
+    @BindView(R.id.txtHashMapRemove) TextView txtHashMapRemove;
 
-    @BindView(R.id.txtTreeMapAdd) TextView treeMapAdd;
-    @BindView(R.id.txtTreeMapSearch) TextView treeMapSearch;
-    @BindView(R.id.txtTreeMapRemove) TextView treeMapRemove;
+    @BindView(R.id.txtTreeMapAdd) TextView txtTreeMapAdd;
+    @BindView(R.id.txtTreeMapSearch) TextView txtTreeMapSearch;
+    @BindView(R.id.txtTreeMapRemove) TextView txtTreeMapRemove;
 
     @BindView(R.id.pbHashMapAdd) ProgressBar pbHashMapAdd;
     @BindView(R.id.pbHashMapSearch) ProgressBar pbHashMapSearch;
@@ -40,8 +41,7 @@ public class MapsFragment extends Fragment {
     @BindView(R.id.pbTreeMapSearch) ProgressBar pbTreeMapSearch;
     @BindView(R.id.pbTreeMapRemove) ProgressBar pbTreeMapRemove;
 
-    private Map<Integer, TextView> textViews;
-    private Map<Integer, ProgressBar> progressBars;
+    private Map<String, TableCell> tableCells;
 
     private Unbinder unbinder;
 
@@ -52,35 +52,24 @@ public class MapsFragment extends Fragment {
         View view = inflater.inflate(R.layout.maps, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        textViews = new TreeMap<>();
+        tableCells = new HashMap<>();
 
-        putTextView(hashMapAdd);
-        putTextView(hashMapSearch);
-        putTextView(hashMapRemove);
+        tableCells.put(Constants.TREE_MAP_ADD,    new TableCell(txtTreeMapAdd, pbTreeMapAdd));
+        tableCells.put(Constants.TREE_MAP_SEARCH, new TableCell(txtTreeMapSearch, pbTreeMapSearch));
+        tableCells.put(Constants.TREE_MAP_REMOVE, new TableCell(txtTreeMapRemove, pbTreeMapRemove));
 
-        putTextView(treeMapAdd);
-        putTextView(treeMapSearch);
-        putTextView(treeMapRemove);
-
-        progressBars = new TreeMap<>();
-
-        putProgressBar(pbHashMapAdd);
-        putProgressBar(pbHashMapSearch);
-        putProgressBar(pbHashMapRemove);
-
-        putProgressBar(pbTreeMapAdd);
-        putProgressBar(pbTreeMapSearch);
-        putProgressBar(pbTreeMapRemove);
-
-       // Log.d("rotate_crush", "Фрагмент в onCreateView " + this.toString());
+        tableCells.put(Constants.HASH_MAP_ADD,    new TableCell(txtHashMapAdd, pbHashMapAdd));
+        tableCells.put(Constants.HASH_MAP_SEARCH, new TableCell(txtHashMapSearch, pbHashMapSearch));
+        tableCells.put(Constants.HASH_MAP_REMOVE, new TableCell(txtHashMapRemove, pbHashMapRemove));
 
         return view;
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        for(Integer key: textViews.keySet()) {
-            saveTextFieldState(outState, textViews.get(key));
+        for(String key: tableCells.keySet()) {
+            String result = tableCells.get(key).getTextView().getText().toString();
+            outState.putString(key, result);
         }
         super.onSaveInstanceState(outState);
     }
@@ -88,8 +77,10 @@ public class MapsFragment extends Fragment {
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         if(savedInstanceState != null) {
-            for(Integer key: textViews.keySet()) {
-                restoreTextFieldState(savedInstanceState, textViews.get(key));
+            for(String key: tableCells.keySet()) {
+                TextView view = tableCells.get(key).getTextView();
+                String result = savedInstanceState.getString(key);
+                view.setText(result);
             }
         }
         super.onViewStateRestored(savedInstanceState);
@@ -101,34 +92,17 @@ public class MapsFragment extends Fragment {
         unbinder.unbind();
     }
 
-    public ProgressBar getProgressBar(int id) {
-        return progressBars.get(id);
-    }
-
-
-    public TextView getTextView(int id) {
-        return textViews.get(id);
-    }
-
-    private void putProgressBar(ProgressBar view) {
-        progressBars.put(view.getId(), view);
-    }
-
-    private void putTextView(TextView view) {
-        textViews.put(view.getId(), view);
-    }
-
-    private void saveTextFieldState(Bundle outState, TextView view) {
-        outState.putString(String.valueOf(view.getId()), view.getText().toString());
-    }
-
-    private void restoreTextFieldState(Bundle savedInstanceState, TextView view) {
-        view.setText(savedInstanceState.getString(String.valueOf(view.getId())));
-    }
-
     public void setProgressBarsVisible() {
-        for(Integer key: progressBars.keySet()) {
-            progressBars.get(key).setVisibility(View.VISIBLE);
+        for(String key: tableCells.keySet()) {
+            tableCells.get(key).getProgressBar().setVisibility(View.VISIBLE);
         }
     }
+
+    public void setTestResult(String stringId, long result) {
+        TableCell tableCell = tableCells.get(stringId);
+        tableCell.getProgressBar().setVisibility(View.INVISIBLE);
+        tableCell.getTextView().setText(String.valueOf(result));
+    }
+
+
 }

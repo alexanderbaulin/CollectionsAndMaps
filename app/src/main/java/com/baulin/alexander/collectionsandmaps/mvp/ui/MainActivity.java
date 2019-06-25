@@ -6,20 +6,16 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
-import com.baulin.alexander.collectionsandmaps.dagger2.components.AppComponent;
 import com.baulin.alexander.collectionsandmaps.dagger2.components.DaggerMainActivityComponent;
 import com.baulin.alexander.collectionsandmaps.dagger2.components.MainActivityComponent;
 import com.baulin.alexander.collectionsandmaps.dagger2.modules.MainActivityModule;
@@ -54,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-      //  Log.d("myLogs", "onCreate");
 
         ButterKnife.bind(this);
 
@@ -72,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
 
         if(savedInstanceState == null) {
             fixScreenOrientation(true);
-          //  Log.d("test", "saveInstanceState = null");
         }
     }
 
@@ -135,24 +129,24 @@ public class MainActivity extends AppCompatActivity implements com.baulin.alexan
     }
 
     @Override
-    public void setProgressIndicator(int pbID, int visibility) {
-        pageAdapter.getProgressBar(pbID).setVisibility(visibility);
+    public void setMapsTestResult(String stringId, long result) {
+        pageAdapter.getMapFragment().setTestResult(stringId, result);
     }
 
     @Override
-    public void setTestResult(int txtID, String result) {
-        pageAdapter.getTextView(txtID).setText(result);
+    public void setCollectionsTestResult(String stringId, long result) {
+        pageAdapter.getCollectionFragment().setTestResult(stringId, result);
     }
 
     @Override
     public void setCollectionTestsExecutingUI() {
-        pageAdapter.setCollectionProgressBarsVisible();
+        pageAdapter.getCollectionFragment().setProgressBarsVisible();
         fixScreenOrientation(true);
     }
 
     @Override
     public void setMapsTestsExecutingUI() {
-        pageAdapter.setMapsProgressBarsVisible();
+        pageAdapter.getMapFragment().setProgressBarsVisible();
         fixScreenOrientation(true);
     }
 

@@ -1,7 +1,7 @@
 package com.baulin.alexander.collectionsandmaps.mvp.presenter;
 
 
-import android.util.Log;
+import android.annotation.SuppressLint;
 
 import com.baulin.alexander.collectionsandmaps.dagger2.App;
 import com.baulin.alexander.collectionsandmaps.dagger2.components.AppComponent;
@@ -17,8 +17,6 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-
-import static android.view.View.*;
 
 
 public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.interfaces.Presenter {
@@ -43,20 +41,14 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
     @Override
     public void onSubmitButtonClicked() {
         String number = view.get().getInputNumber();
-        if(number.equals("")) {
-            view.get().showToast("Enter number");
-            return;
-        }
-        if(number.equals("0")) {
-            view.get().showToast("Enter number > 0");
+        if(number.equals("") || number.contains("-")) {
+            view.get().showToast("Enter int number >= 0");
             return;
         }
         numberOfElements = Integer.valueOf(number);
         view.get().setPostSubmitClickedUI();
         fillCollectionsAndMaps(model.getFillTasks());
     }
-
-
 
     @Override
     public void onFloatingCalculationButtonClicked() {
@@ -96,53 +88,44 @@ public class Presenter implements com.baulin.alexander.collectionsandmaps.mvp.in
         view.get().setPostLoadingUI();
     }
 
+    @SuppressLint("CheckResult")
     private void runCollectionsTests(Observable<Test> tests) {
         tests.flatMap(Test ->
                 Observable.just(Test)
                         .subscribeOn(Schedulers.computation())
                         .map(asyncTask -> {
-                            long timeTaskExecution = asyncTask.run();
+                            asyncTask.run();
                             //Log.d("rxJava", "Running " + Test.getStringId() + " on: " + Thread.currentThread().getName());
-                            // testResults.put(task.getStringId(), timeTaskExecution);
                             asyncTask.getStringId();
-                            return asyncTask; ///////////// task.getStringId()
+                            return asyncTask;
                         })
                         .observeOn(AndroidSchedulers.mainThread())
         )
                 .doOnComplete(this::runCollectionsTests)
                 .subscribe(Test -> {
-                            int txtID = Test.getTxtViewID();
-                            int pbID = Test.getPbViewID();
-                            long timeTaskExecution = Test.getResult();
-                            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
-                            view.get().setProgressIndicator(pbID, INVISIBLE);
+                            view.get().setCollectionsTestResult(Test.getStringId(), Test.getResult());
                             executingTests--;
                             if(executingTests == 0) view.get().setTestsPostExecutingUI();
-
-                           // Log.d("rxJava", "Consuming item " + Test.getStringId() + " on: " + Thread.currentThread().getName());
+                            //Log.d("rxJava", "Consuming item " + Test.getStringId() + " on: " + Thread.currentThread().getName());
                         }
                 );
     }
 
+    @SuppressLint("CheckResult")
     private void runMapsTests(Observable<Test> tests) {
         tests.flatMap(Test ->
                 Observable.just(Test)
                         .subscribeOn(Schedulers.computation())
                         .map(asyncTask -> {
-                            long timeTaskExecution = asyncTask.run();
+                            asyncTask.run();
                             //Log.d("rxJava", "Running " + Test.getStringId() + " on: " + Thread.currentThread().getName());
-                            // testResults.put(task.getStringId(), timeTaskExecution);
-                            asyncTask.getStringId();
-                            return asyncTask; ///////////// task.getStringId()
+                            //asyncTask.getStringId();
+                            return asyncTask;
                         })
                         .observeOn(AndroidSchedulers.mainThread())
         )
                 .subscribe(Test -> {
-                            int txtID = Test.getTxtViewID();
-                            int pbID = Test.getPbViewID();
-                            long timeTaskExecution = Test.getResult();
-                            view.get().setTestResult(txtID, String.valueOf(timeTaskExecution));
-                            view.get().setProgressIndicator(pbID, INVISIBLE);
+                            view.get().setMapsTestResult(Test.getStringId(), Test.getResult());
                             executingTests--;
                             if(executingTests == 0) view.get().setTestsPostExecutingUI();
                             // Log.d("rxJava", "Consuming item " + Test.getStringId() + " on: " + Thread.currentThread().getName());

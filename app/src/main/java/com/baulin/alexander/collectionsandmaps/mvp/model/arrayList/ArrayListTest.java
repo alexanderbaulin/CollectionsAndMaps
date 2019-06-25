@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ArrayListTest implements Fillable {
-    public static ArrayList<Integer> arrayList = new ArrayList<>();
+    static ArrayList<Integer> arrayList = new ArrayList<>();
     protected static Integer testElement = 1;
 
     @Override

@@ -4,10 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 
 public class SectionsPageAdapter extends FragmentPagerAdapter {
@@ -33,7 +30,6 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-       // Log.d("test", "getItem " + position);
         switch (position) {
             case 0:
                 return new CollectionsFragment();
@@ -46,9 +42,8 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
         Fragment createdFragment = (Fragment)super.instantiateItem(container, position);
-           // Log.d("test", "instantiateItem " + position);
         switch (position) {
             case 0:
                 collections = (CollectionsFragment) createdFragment;
@@ -65,27 +60,11 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
         return 2;
     }
 
-    public ProgressBar getProgressBar(int id) {
-        ProgressBar view = maps.getProgressBar(id);
-        if(view != null)
-            return view;
-        else
-            return collections.getProgressBar(id);
+    MapsFragment getMapFragment() {
+        return maps;
     }
 
-    public TextView getTextView(int id) {
-        TextView view = maps.getTextView(id);
-        if(view != null)
-            return view;
-        else
-            return collections.getTextView(id);
-    }
-
-    public void setCollectionProgressBarsVisible() {
-        collections.setProgressBarsVisible();
-    }
-
-    public void setMapsProgressBarsVisible() {
-        maps.setProgressBarsVisible();
+    CollectionsFragment getCollectionFragment() {
+        return collections;
     }
 }

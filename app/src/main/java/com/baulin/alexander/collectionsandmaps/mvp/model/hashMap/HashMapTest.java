@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HashMapTest implements Fillable {
-    public static java.util.HashMap<Integer, Integer> hashMap = new java.util.HashMap<>();
-    protected static Integer testKey = 1;
-    protected static Integer testValue = 1;
+    static java.util.HashMap<Integer, Integer> hashMap = new java.util.HashMap<>();
+    static Integer testKey = 1;
+    static Integer testValue = 1;
 
 
     @Override

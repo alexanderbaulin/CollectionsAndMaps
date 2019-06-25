@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CopyOnWriteTest implements Fillable {
-    public static CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
-    protected static Integer testElement = 1;
+    static CopyOnWriteArrayList<Integer> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
+    static Integer testElement = 1;
 
     @Override
     public void fillWithElements(int elements) {

@@ -2,12 +2,6 @@ package com.baulin.alexander.collectionsandmaps.mvp.model;
 
 
 public class Constants {
-    public static final String ARRAY_LIST = "arrayList";
-    public static final String LINKED_LIST = "linkedList";
-    public static final String COPY_ARRAY_LIST = "copyArrayList";
-    public static final String HASH_MAP = "hashMap";
-    public static final String TREE_MAP = "treeMap";
-
     public static final String ARRAY_ADD_BEGIN = "arrayAddBegin";
     public static final String ARRAY_ADD_MIDDLE = "arrayAddMiddle";
     public static final String ARRAY_ADD_END = "arrayAddEnd";
@@ -24,7 +18,7 @@ public class Constants {
     public static final String LINKED_REMOVE_MIDDLE = "linkedRemoveMiddle";
     public static final String LINKED_REMOVE_END = "linkedRemoveEnd";
 
-    public static final String COPY_ON_WRITE_BEGIN = "copyOnWriteAddBegin";
+    public static final String COPY_ON_WRITE_ADD_BEGIN = "copyOnWriteAddBegin";
     public static final String COPY_ON_WRITE_ADD_MIDDLE = "copyOnWriteAddMiddle";
     public static final String COPY_ON_WRITE_ADD_END = "copyOnWriteAddEnd";
     public static final String COPY_ON_WRITE_SEARCH_VALUE = "copyOnWriteSearchValue";

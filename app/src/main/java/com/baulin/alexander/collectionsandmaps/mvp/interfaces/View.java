@@ -5,13 +5,14 @@ public interface View {
     void showToast(String message);
     boolean isTabCollectionSelected();
     String getInputNumber();
-    void setPostSubmitClickedUI();
+
     void setPreSubmitClickedUI();
+    void setPostSubmitClickedUI();
     void setPostLoadingUI();
-    void setProgressIndicator(int pbID, int visible);
-    void setTestResult(int txtID, String result);
     void setCollectionTestsExecutingUI();
     void setMapsTestsExecutingUI();
-
     void setTestsPostExecutingUI();
+
+    void setMapsTestResult(String stringId, long result);
+    void setCollectionsTestResult(String stringId, long result);
 }
